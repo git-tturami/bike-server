@@ -12,3 +12,6 @@ cache:
     - '$HOME/.gradle'
 
 script: "./gradlew clean build"
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls

@@ -1,0 +1,8 @@
+# 따로롱 Back-end
+
+이 프로젝트는 git-tturami에서 만들고 있는 *따로롱* 프로젝트에 사용될 서버입니다.
+* framework : Spring boot
+* 개발자 : 부현식, 황민지, 윤민욱, 박주현 
+
+## Architecture
+<img src="img/architecture.png">

@@ -7,11 +7,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BikeServerApplicationTests {
+public class BikeServerApplicationTest {
 
 	@Test
 	public void contextLoads() {
 	}
-
 
 }

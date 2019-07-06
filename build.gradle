@@ -4,6 +4,8 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'jacoco'
 
 group = 'com.gitturami'
 version = '1.0.0'
@@ -16,6 +18,13 @@ configurations {
 	}
 	compileOnly {
 		extendsFrom annotationProcessor
+	}
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled = true
+		html.enabled = true
 	}
 }
 

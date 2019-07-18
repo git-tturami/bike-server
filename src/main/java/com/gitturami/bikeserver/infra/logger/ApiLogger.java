@@ -1,4 +1,4 @@
-package com.gitturami.bikeserver.api.logger;
+package com.gitturami.bikeserver.infra.logger;
 
 import com.gitturami.bikeserver.common.logger.Logger;
 

@@ -1,6 +1,8 @@
 package com.gitturami.bikeserver.infra.bike.impl;
 
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationList;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import com.gitturami.bikeserver.infra.bike.retrofit.BikeRetrofit;
 import com.gitturami.bikeserver.infra.logger.ApiLogger;
@@ -10,6 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 public class BikeStationApiImpl implements BikeStationApi {
 
@@ -34,6 +37,21 @@ public class BikeStationApiImpl implements BikeStationApi {
 
     @Override
     public String getTotalBike() {
+        return null;
+    }
+
+    //minji
+    @Override
+    public String getStationInfoById (String stationId) {
+        BikeStationResponse bikeStationResponse;
+        bikeStationResponse = getStationList(1, 1000);
+
+        List<BikeStationRepo> totalBikeStationList = bikeStationResponse.rentBikeStatus.row;
+        for(int i=0; i<totalBikeStationList.size(); i++) {
+            if(totalBikeStationList.get(i).stationId.equals(stationId)) {
+                return totalBikeStationList.get(i).toJson();
+            }
+        }
         return null;
     }
 

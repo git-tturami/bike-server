@@ -12,6 +12,9 @@ public interface BikeStationApi {
     // getTotalBike() returns total number of bike.
     String getTotalBike();
 
+    // getStationInfoById() returns station information with the station-ID requested by client.
+    String getStationInfoById(String stationId);
+
     // getStationList() returns station list from start page to end page.
     BikeStationResponse getStationList(int startPage, int endPage);
 }

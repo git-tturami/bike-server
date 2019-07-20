@@ -1,5 +1,7 @@
 package com.gitturami.bikeserver.infra.bike.repository;
 
+import com.google.gson.Gson;
+
 public class BikeStationRepo {
     public int rackTotCnt;
     public String stationName;
@@ -21,5 +23,9 @@ public class BikeStationRepo {
                         "station id : %s\n",
                 rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude, stationId
         );
+    }
+
+    public String toJson() {
+        return new Gson().toJson(this);
     }
 }

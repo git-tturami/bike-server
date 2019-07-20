@@ -9,6 +9,6 @@ public interface BikeRetrofit {
     @GET("bikeList/{startPage}/{endPage}")
     Call<BikeStationResponse> listStation(
             @Path("startPage") int startPage,
-            @Path("endPage")int endPage
+            @Path("endPage") int endPage
     );
 }

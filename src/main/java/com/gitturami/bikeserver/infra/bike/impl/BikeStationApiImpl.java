@@ -56,7 +56,7 @@ public class BikeStationApiImpl implements BikeStationApi {
     }
 
     @Override
-    public String getStationInfoByName(String townName) {
+    public String getStationInfoByTownName(String townName) {
         BikeStationResponse bikeStationResponse;
         bikeStationResponse = getStationList(1, 1000);
         List<BikeStationRepo> totalBikeStationList = bikeStationResponse.rentBikeStatus.row;

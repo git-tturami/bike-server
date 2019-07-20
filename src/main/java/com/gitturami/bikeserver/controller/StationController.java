@@ -23,8 +23,8 @@ public class StationController {
 
     @RequestMapping(value= "/stations", params= "name")
     @ResponseStatus(value= HttpStatus.OK)
-    public String getStationInfoByName(@RequestParam String name) {
-        String result = bikeStationApi.getStationInfoByName(name);
+    public String getStationInfoByTownName(@RequestParam String name) {
+        String result = bikeStationApi.getStationInfoByTownName(name);
 
         if (result == null) {
             throw new StationNotFoundException();

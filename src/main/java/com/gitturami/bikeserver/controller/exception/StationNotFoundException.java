@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class StationNotFoundException extends RuntimeException {
     @Override
     public String toString() {
-        return "Station Id is not found.";
+        return "Not found. Try Again.";
     }
 }

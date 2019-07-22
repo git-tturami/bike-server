@@ -45,11 +45,25 @@ public class BikeStationApiImpl implements BikeStationApi {
     public String getStationInfoById (String stationId) {
         BikeStationResponse bikeStationResponse;
         bikeStationResponse = getStationList(1, 1000);
-
         List<BikeStationRepo> totalBikeStationList = bikeStationResponse.rentBikeStatus.row;
-        for(int i=0; i<totalBikeStationList.size(); i++) {
-            if(totalBikeStationList.get(i).stationId.equals(stationId)) {
-                return totalBikeStationList.get(i).toJson();
+
+        for(BikeStationRepo bikeStationRepo : totalBikeStationList) {
+            if(bikeStationRepo.stationId.equals(stationId)) {
+                return bikeStationRepo.toJson();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String getStationInfoByName(String townName) {
+        BikeStationResponse bikeStationResponse;
+        bikeStationResponse = getStationList(1, 1000);
+        List<BikeStationRepo> totalBikeStationList = bikeStationResponse.rentBikeStatus.row;
+
+        for(BikeStationRepo bikeStationRepo : totalBikeStationList) {
+            if(bikeStationRepo.stationName.contains(townName)) {
+                return bikeStationRepo.toJson();
             }
         }
         return null;

@@ -10,10 +10,21 @@ import org.springframework.web.bind.annotation.*;
 public class StationController {
     private BikeStationApi bikeStationApi = new BikeStationApiImpl();
 
-    @RequestMapping(value= "/stations", method= RequestMethod.GET)
+    @RequestMapping(value= "/stations", params= "id")
     @ResponseStatus(value= HttpStatus.OK)
     public String getStationInfoById(@RequestParam String id) {
         String result = bikeStationApi.getStationInfoById(id);
+
+        if (result == null) {
+            throw new StationNotFoundException();
+        }
+        return result;
+    }
+
+    @RequestMapping(value= "/stations", params= "name")
+    @ResponseStatus(value= HttpStatus.OK)
+    public String getStationInfoByName(@RequestParam String name) {
+        String result = bikeStationApi.getStationInfoByName(name);
 
         if (result == null) {
             throw new StationNotFoundException();

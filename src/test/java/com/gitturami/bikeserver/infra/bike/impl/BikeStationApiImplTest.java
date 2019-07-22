@@ -39,4 +39,16 @@ public class BikeStationApiImplTest {
             fail();
         }
     }
+
+    @Test
+    public void testGetStationInfoByName() {
+        String result = api.getStationInfoByName("링딩동");
+        System.out.println(result);
+        assertNull(result);
+
+        result = api.getStationInfoByName("서교동");
+        if(!result.contains("ST-10")) {
+            fail();
+        }
+    }
 }

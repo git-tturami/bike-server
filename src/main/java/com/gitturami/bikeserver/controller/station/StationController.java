@@ -1,4 +1,4 @@
-package com.gitturami.bikeserver.controller;
+package com.gitturami.bikeserver.controller.station;
 
 import com.gitturami.bikeserver.controller.exception.StationNotFoundException;
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;

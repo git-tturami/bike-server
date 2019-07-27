@@ -1,5 +1,6 @@
 package com.gitturami.bikeserver.controller;
 
+import com.gitturami.bikeserver.controller.status.StatusController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

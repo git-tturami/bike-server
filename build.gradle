@@ -46,9 +46,12 @@ dependencies {
 	implementation 'com.squareup.retrofit2:retrofit:2.6.0'
 	implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 	implementation 'com.google.code.gson:gson:2.8.5'
+	implementation 'org.mongodb:mongodb-driver-sycn:3.10.2'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 }

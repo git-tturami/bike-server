@@ -46,7 +46,7 @@ dependencies {
 	implementation 'com.squareup.retrofit2:retrofit:2.6.0'
 	implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 	implementation 'com.google.code.gson:gson:2.8.5'
-	implementation 'org.mongodb:mongodb-driver-sycn:3.10.2'
+	implementation 'org.mongodb:mongodb-driver-sync:3.10.2'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
@@ -54,4 +54,10 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'junit:junit:4.12'
+	testImplementation 'org.mockito:mockito-core:2.9.0'
+	testImplementation 'org.powermock:powermock-module-junit4:1.7.1'
+	testImplementation 'org.powermock:powermock-api-mockito2:1.7.1'
+	testImplementation 'org.powermock:powermock-module-junit4-rule:1.7.1'
+	testImplementation 'org.powermock:powermock-core:1.7.1'
 }

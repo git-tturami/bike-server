@@ -1,18 +1,23 @@
 package com.gitturami.bikeserver.infra.bike.impl;
 
-import com.gitturami.bikeserver.infra.bike.BikeStationApi;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
+@PowerMockIgnore("javax.net.ssl.*")
 public class BikeStationApiImplTest {
 
-    private BikeStationApi api;
+    private BikeStationApiImpl api;
     @Before
     public void setUp() {
         api = new BikeStationApiImpl();
@@ -49,6 +54,26 @@ public class BikeStationApiImplTest {
         result = api.getStationInfoByTownName("서교동");
         if(!result.contains("ST-10")) {
             fail();
+        }
+    }
+
+    @Test
+    public void testGetStationListByEnableBike() {
+        String result = api.getStationListByEnableBike();
+        System.out.println(result);
+    }
+
+    @Test
+    public void testSortingStationListByEnableBike() throws Exception {
+        BikeStationResponse bikeStationResponse =
+                Whitebox.invokeMethod(api, "sortingStationListByEnableBike");
+
+        List<BikeStationRepo> bikeStationList = bikeStationResponse.rentBikeStatus.row;
+
+        for (int i = 1; i<bikeStationList.size(); i++) {
+            if (bikeStationList.get(i-1).parkingBikeTotCnt < bikeStationList.get(i).parkingBikeTotCnt) {
+                fail(i + "index is bigger than " + (i-1) + "index.");
+            }
         }
     }
 }

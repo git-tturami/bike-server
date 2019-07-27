@@ -12,6 +12,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class BikeStationApiImpl implements BikeStationApi {
@@ -43,12 +45,11 @@ public class BikeStationApiImpl implements BikeStationApi {
     //minji
     @Override
     public String getStationInfoById (String stationId) {
-        BikeStationResponse bikeStationResponse;
-        bikeStationResponse = getStationList(1, 1000);
+        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
         List<BikeStationRepo> totalBikeStationList = bikeStationResponse.rentBikeStatus.row;
 
-        for(BikeStationRepo bikeStationRepo : totalBikeStationList) {
-            if(bikeStationRepo.stationId.equals(stationId)) {
+        for (BikeStationRepo bikeStationRepo : totalBikeStationList) {
+            if (bikeStationRepo.stationId.equals(stationId)) {
                 return bikeStationRepo.toJson();
             }
         }
@@ -57,16 +58,30 @@ public class BikeStationApiImpl implements BikeStationApi {
 
     @Override
     public String getStationInfoByTownName(String townName) {
-        BikeStationResponse bikeStationResponse;
-        bikeStationResponse = getStationList(1, 1000);
+        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
         List<BikeStationRepo> totalBikeStationList = bikeStationResponse.rentBikeStatus.row;
 
-        for(BikeStationRepo bikeStationRepo : totalBikeStationList) {
-            if(bikeStationRepo.stationName.contains(townName)) {
+        for (BikeStationRepo bikeStationRepo : totalBikeStationList) {
+            if (bikeStationRepo.stationName.contains(townName)) {
                 return bikeStationRepo.toJson();
             }
         }
         return null;
+    }
+
+    private BikeStationResponse sortingStationListByEnableBike() {
+        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
+
+        bikeStationResponse.rentBikeStatus.row.sort((o1, o2) -> o2.parkingBikeTotCnt - o1.parkingBikeTotCnt);
+
+        return bikeStationResponse;
+    }
+
+    @Override
+    public String getStationListByEnableBike() {
+        BikeStationResponse bikeStationResponse = sortingStationListByEnableBike();
+
+        return bikeStationResponse.toJson();
     }
 
     @Override

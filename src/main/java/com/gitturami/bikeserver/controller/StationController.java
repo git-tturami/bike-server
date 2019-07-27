@@ -31,4 +31,10 @@ public class StationController {
         }
         return result;
     }
+
+    @RequestMapping(value= "/stations/enable", method= RequestMethod.GET)
+    @ResponseStatus(value= HttpStatus.OK)
+    public String getStationListByEnableBike() {
+        return bikeStationApi.getStationListByEnableBike();
+    }
 }

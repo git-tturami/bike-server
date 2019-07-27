@@ -15,8 +15,11 @@ public interface BikeStationApi {
     // getStationInfoById() returns station information with the station-ID requested by client.
     String getStationInfoById(String stationId);
 
-    // // getStationInfoById() returns station information with the town name requested by client.
+    // getStationInfoByTownName() returns station information with the town-name requested by client.
     String getStationInfoByTownName(String townName);
+
+    // getStationListBy() returns stations list sorted by the number of enable bike.
+    String getStationListByEnableBike();
 
     // getStationList() returns station list from start page to end page.
     BikeStationResponse getStationList(int startPage, int endPage);

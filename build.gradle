@@ -45,8 +45,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.squareup.retrofit2:retrofit:2.6.0'
 	implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+	implementation 'com.squareup.retrofit2:converter-jaxb:2.6.0'
 	implementation 'com.google.code.gson:gson:2.8.5'
 	implementation 'org.mongodb:mongodb-driver-sync:3.10.2'
+	implementation 'javax.xml.bind:jaxb-api:2.3.0'
+	implementation 'javax.activation:activation:1.1'
+	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.0'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'

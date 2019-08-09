@@ -1,15 +1,26 @@
 package com.gitturami.bikeserver.controller.station;
 
+import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.controller.station.exception.StationNotFoundException;
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
 import com.gitturami.bikeserver.infra.bike.impl.BikeStationApiImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/stations")
 public class StationController {
-    private BikeStationApi bikeStationApi = new BikeStationApiImpl();
+    @Autowired
+    private RetrofitConfig config;
+    @Autowired
+    private BikeStationApi bikeStationApi;
+
+    public StationController() {
+        System.out.println("Station Controller");
+    }
 
     @GetMapping("/id")
     public String getStationInfoById(@RequestParam String id) {

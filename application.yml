@@ -1,0 +1,3 @@
+url:
+  bikeUrl: http://openapi.seoul.go.kr:8088/4b64546d6862687339384d4b625366/json/
+  tourUrl: http://api.visitkorea.or.kr/openapi/service/rest/KorService/

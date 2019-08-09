@@ -10,6 +10,7 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore({"javax.net.ssl.*",
@@ -28,7 +29,9 @@ public class LeisureApiImplTest {
     @Test
     public void testGetAllLeisureInformation() {
         LeisureResponse response = leisureApiImpl.getAllLeisureInformation();
-        assertEquals(2859, response.body.items.size());
+        if (response.body.items.size() < 2000) {
+            fail();
+        }
     }
 
     @Test

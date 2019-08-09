@@ -1,5 +1,6 @@
 package com.gitturami.bikeserver.infra.bike.impl;
 
+import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import org.junit.Before;
@@ -8,20 +9,24 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-@RunWith(PowerMockRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @PowerMockIgnore("javax.net.ssl.*")
 public class BikeStationApiImplTest {
 
+    @Autowired
     private BikeStationApiImpl api;
-    @Before
-    public void setUp() {
-        api = new BikeStationApiImpl();
-    }
 
     @Test
     public void testGetStationList() {

@@ -26,19 +26,6 @@ public class BikeStationApiImpl implements BikeStationApi {
     @Autowired
     private RetrofitConfig retrofitConfig;
 
-    @Override
-    public BikeStationResponse getStationList(int startPage, int endPage) {
-        Call<BikeStationResponse> call = bikeRetrofit.listStation(startPage, endPage);
-        try {
-            Response<BikeStationResponse> response = call.execute();
-            BikeStationResponse body = response.body();
-            return body;
-        } catch (IOException e) {
-            ApiLogger.i(TAG, e.getMessage());
-        }
-        return null;
-    }
-
     private List<BikeStationRepo> requestAllStationList() {
         return getStationList(1, 1000).rentBikeStatus.row;
     }
@@ -122,6 +109,11 @@ public class BikeStationApiImpl implements BikeStationApi {
         } catch (IOException e) {
             ApiLogger.i(TAG, e.getMessage());
         }
+        return null;
+    }
+
+    @Override
+    public String getStationInfo() {
         return null;
     }
 }

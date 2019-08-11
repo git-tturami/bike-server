@@ -35,4 +35,9 @@ public class StationController {
     public String getStationListByEnableBike() {
         return bikeStationApi.getStationListByEnableBike();
     }
+
+    @GetMapping("/close")
+    public String getStationListByDistance(@RequestParam float lat, @RequestParam float lon) {
+        return bikeStationApi.getStationListByDistance(lat, lon);
+    }
 }

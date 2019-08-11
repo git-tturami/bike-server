@@ -34,7 +34,6 @@ public class LeisureApiImpl implements LeisureApi {
         );
     }
 
-
     @Override
     public LeisureResponse getLeisureInformationByContentId(ContentTypeIds contentTypeId) {
         return callRetrofit(

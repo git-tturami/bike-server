@@ -1,7 +1,6 @@
 package com.gitturami.bikeserver.infra.bike.impl;
 
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
-import com.gitturami.bikeserver.infra.bike.repository.BikeStationList;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import com.gitturami.bikeserver.infra.bike.retrofit.BikeRetrofit;
@@ -12,7 +11,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -31,9 +29,31 @@ public class BikeStationApiImpl implements BikeStationApi {
     }
 
     @Override
-    public String getEnableBike(String stationId) {
-        // Call<List<BikeStationRepo>> list = bikeRetrofit.listStation(startPage, endPage);
+    public BikeStationResponse getStationList(int startPage, int endPage) {
+        Call<BikeStationResponse> call = bikeRetrofit.listStation(startPage, endPage);
+        try {
+            Response<BikeStationResponse> response = call.execute();
+            BikeStationResponse body = response.body();
+            return body;
+        } catch (IOException e) {
+            ApiLogger.i(TAG, e.getMessage());
+        }
+        return null;
+    }
 
+    private List<BikeStationRepo> requestAllStationList() {
+        return getStationList(1, 1000).rentBikeStatus.row;
+    }
+
+    private BikeStationResponse requestAndSortStationList(Comparator<BikeStationRepo> comparator) {
+        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
+        bikeStationResponse.rentBikeStatus.row.sort(comparator);
+        return bikeStationResponse;
+    }
+
+    @Override
+    public String getEnableBike(String stationId) {
+        // TODO : implement it!
         return null;
     }
 
@@ -45,8 +65,7 @@ public class BikeStationApiImpl implements BikeStationApi {
     //minji
     @Override
     public String getStationInfoById (String stationId) {
-        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
-        List<BikeStationRepo> totalBikeStationList = bikeStationResponse.rentBikeStatus.row;
+        List<BikeStationRepo> totalBikeStationList = requestAllStationList();
 
         for (BikeStationRepo bikeStationRepo : totalBikeStationList) {
             if (bikeStationRepo.stationId.equals(stationId)) {
@@ -58,8 +77,7 @@ public class BikeStationApiImpl implements BikeStationApi {
 
     @Override
     public String getStationInfoByTownName(String townName) {
-        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
-        List<BikeStationRepo> totalBikeStationList = bikeStationResponse.rentBikeStatus.row;
+        List<BikeStationRepo> totalBikeStationList = requestAllStationList();
 
         for (BikeStationRepo bikeStationRepo : totalBikeStationList) {
             if (bikeStationRepo.stationName.contains(townName)) {
@@ -70,11 +88,7 @@ public class BikeStationApiImpl implements BikeStationApi {
     }
 
     private BikeStationResponse sortingStationListByEnableBike() {
-        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
-
-        bikeStationResponse.rentBikeStatus.row.sort((o1, o2) -> o2.parkingBikeTotCnt - o1.parkingBikeTotCnt);
-
-        return bikeStationResponse;
+        return requestAndSortStationList((o1, o2) -> o2.parkingBikeTotCnt - o1.parkingBikeTotCnt);
     }
 
     @Override
@@ -85,20 +99,23 @@ public class BikeStationApiImpl implements BikeStationApi {
     }
 
     @Override
-    public String getStationInfo() {
-        return null;
+    public String getStationListByDistance(float lat, float lon) {
+        BikeStationResponse bikeStationResponse = sortingStationListByDistance(lat, lon);
+        return bikeStationResponse.toJson();
+    }
+
+    private BikeStationResponse sortingStationListByDistance(float lat, float lon) {
+        return requestAndSortStationList((o1, o2) -> {
+            double distanceFromA = Math.pow((double)(o1.stationLatitude - lat), 2.0)
+                    + Math.pow((double)(o1.stationLongitude - lon), 2.0);
+            double distanceFromB = Math.pow((double)(o2.stationLatitude - lat), 2.0)
+                    + Math.pow((double)(o2.stationLongitude - lon), 2.0);
+            return Double.compare(distanceFromA, distanceFromB);
+        });
     }
 
     @Override
-    public BikeStationResponse getStationList(int startPage, int endPage) {
-        Call<BikeStationResponse> call = bikeRetrofit.listStation(startPage, endPage);
-        try {
-            Response<BikeStationResponse> response = call.execute();
-            BikeStationResponse body = response.body();
-            return body;
-        } catch (IOException e) {
-            ApiLogger.i(TAG, e.getMessage());
-        }
+    public String getStationInfo() {
         return null;
     }
 }

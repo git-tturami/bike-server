@@ -1,6 +1,6 @@
 package com.gitturami.bikeserver.controller.station;
 
-import com.gitturami.bikeserver.controller.exception.StationNotFoundException;
+import com.gitturami.bikeserver.controller.station.exception.StationNotFoundException;
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
 import com.gitturami.bikeserver.infra.bike.impl.BikeStationApiImpl;
 import org.springframework.http.HttpStatus;

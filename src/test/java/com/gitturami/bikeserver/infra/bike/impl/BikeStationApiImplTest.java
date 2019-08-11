@@ -82,4 +82,27 @@ public class BikeStationApiImplTest {
             }
         }
     }
+
+    @Test
+    public void testSortiongStationListByDistance() throws Exception {
+        // testLat testLong is lat and lon of Chung-Ang university
+        float testLat = 37.5050881f;
+        float testLon = 126.9571012f;
+        BikeStationResponse bikeStationResponse =
+                Whitebox.invokeMethod(api, "sortingStationListByDistance", testLat, testLon);
+
+        double prevDistance = 0.0;
+        for (int i=0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
+            BikeStationRepo repo = bikeStationResponse.rentBikeStatus.row.get(i);
+            double distance = Math.pow((double)(repo.stationLatitude - testLat), 2.0)
+                    + Math.pow((double)(repo.stationLongitude - testLon), 2.0);
+            if (i > 0) {
+                // Distance must be larger than previous Distance.
+                if (distance < prevDistance) {
+                    fail();
+                }
+            }
+            prevDistance = distance;
+        }
+    }
 }

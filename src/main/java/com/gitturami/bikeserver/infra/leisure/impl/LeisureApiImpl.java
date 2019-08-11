@@ -9,7 +9,6 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jaxb.JaxbConverterFactory;
-
 import java.io.IOException;
 
 public class LeisureApiImpl implements LeisureApi {

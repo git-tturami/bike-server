@@ -7,11 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/stations")
 public class StationController {
     private BikeStationApi bikeStationApi = new BikeStationApiImpl();
 
-    @RequestMapping(value= "/stations", params= "id")
-    @ResponseStatus(value= HttpStatus.OK)
+    @GetMapping("/id")
     public String getStationInfoById(@RequestParam String id) {
         String result = bikeStationApi.getStationInfoById(id);
 
@@ -21,8 +21,7 @@ public class StationController {
         return result;
     }
 
-    @RequestMapping(value= "/stations", params= "name")
-    @ResponseStatus(value= HttpStatus.OK)
+    @GetMapping("/name")
     public String getStationInfoByTownName(@RequestParam String name) {
         String result = bikeStationApi.getStationInfoByTownName(name);
 
@@ -32,8 +31,7 @@ public class StationController {
         return result;
     }
 
-    @RequestMapping(value= "/stations/enable", method= RequestMethod.GET)
-    @ResponseStatus(value= HttpStatus.OK)
+    @GetMapping("/enable")
     public String getStationListByEnableBike() {
         return bikeStationApi.getStationListByEnableBike();
     }

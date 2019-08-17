@@ -18,10 +18,6 @@ public class StationController {
     @Autowired
     private BikeStationApi bikeStationApi;
 
-    public StationController() {
-        System.out.println("Station Controller");
-    }
-
     @GetMapping("/id")
     public String getStationInfoById(@RequestParam String id) {
         String result = bikeStationApi.getStationInfoById(id);

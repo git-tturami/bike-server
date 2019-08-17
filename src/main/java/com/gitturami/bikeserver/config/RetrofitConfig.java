@@ -1,18 +1,18 @@
 package com.gitturami.bikeserver.config;
 
 import com.gitturami.bikeserver.infra.bike.retrofit.BikeRetrofit;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.jaxb.JaxbConverterFactory;
 
 @Component
-@ConfigurationProperties(prefix="url")
 public class RetrofitConfig {
     private BikeRetrofit bikeRetrofit;
 
+    @Value("${url.bikeUrl}")
     private String bikeUrl;
+    @Value("${url.tourUrl}")
     private String tourUrl;
 
     public RetrofitConfig() {

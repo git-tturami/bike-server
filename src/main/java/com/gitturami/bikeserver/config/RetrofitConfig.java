@@ -1,11 +1,13 @@
 package com.gitturami.bikeserver.config;
 
 import com.gitturami.bikeserver.infra.bike.retrofit.BikeRetrofit;
+import com.gitturami.bikeserver.infra.leisure.retrofit.LeisureRetrofit;
 import com.gitturami.bikeserver.infra.restaurant.retrofit.RestaurantRetrofit;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.jaxb.JaxbConverterFactory;
 
 import java.util.ResourceBundle;
 
@@ -13,6 +15,7 @@ import java.util.ResourceBundle;
 public class RetrofitConfig {
     private BikeRetrofit bikeRetrofit;
     private RestaurantRetrofit restaurantRetrofit;
+    private LeisureRetrofit leisureRetrofit;
 
     @Value("${url.bikeUrl}")
     private String bikeUrl;
@@ -20,6 +23,8 @@ public class RetrofitConfig {
     private String tourUrl;
     @Value("${url.restaurantUrl}")
     private String restaurantUrl;
+    @Value("${url.leisureUrl}")
+    private String leisureUrl;
 
     public RetrofitConfig() {
         System.out.println("retrofit config");
@@ -63,5 +68,21 @@ public class RetrofitConfig {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RestaurantRetrofit.class);
+    }
+
+    public LeisureRetrofit getLeisureRetrofit() {
+        if (leisureRetrofit == null) {
+            setLeisureRetrofit();
+        }
+
+        return leisureRetrofit;
+    }
+
+    private void setLeisureRetrofit() {
+        leisureRetrofit = new Retrofit.Builder()
+                .baseUrl("http://api.visitkorea.or.kr/openapi/service/rest/KorService/")
+                .addConverterFactory(JaxbConverterFactory.create())
+                .build()
+                .create(LeisureRetrofit.class);
     }
 }

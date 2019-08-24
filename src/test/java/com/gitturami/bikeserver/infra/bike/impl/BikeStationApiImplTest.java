@@ -40,37 +40,38 @@ public class BikeStationApiImplTest {
 
     @Test
     public void testGetStationInfoById_success() {
-        String result = api.getStationInfoById("ST-109898");
+        BikeStationRepo result = api.getStationInfoById("ST-109898");
         System.out.println(result);
         assertNull(result);
     }
 
     @Test
     public void testGetStationInfoById_fail() {
-        String result = api.getStationInfoById("ST-10");
-        if (!result.contains("서교동")) {
+        BikeStationRepo result = api.getStationInfoById("ST-10");
+        if (!result.stationName.contains("서교동")) {
             fail();
         }
     }
 
     @Test
     public void testGetStationInfoByName_success() {
-        String result = api.getStationInfoByTownName("링딩동");
+        BikeStationRepo result = api.getStationInfoByTownName("링딩동");
         System.out.println(result);
         assertNull(result);
     }
 
     @Test
     public void testGetStationInfoByTownName_fail() {
-        String result = api.getStationInfoByTownName("서교동");
-        if(!result.contains("ST-10")) {
+        BikeStationRepo result = api.getStationInfoByTownName("서교동");
+        System.out.println(result);
+        if(!result.stationId.contains("ST-10")) {
             fail();
         }
     }
 
     @Test
     public void testGetStationListByEnableBike() {
-        String result = api.getStationListByEnableBike();
+        BikeStationResponse result = api.getStationListByEnableBike();
         System.out.println(result);
     }
 

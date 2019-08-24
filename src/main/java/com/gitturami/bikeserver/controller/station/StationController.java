@@ -4,6 +4,8 @@ import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.controller.station.exception.StationNotFoundException;
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
 import com.gitturami.bikeserver.infra.bike.impl.BikeStationApiImpl;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,8 @@ public class StationController {
     private BikeStationApi bikeStationApi;
 
     @GetMapping("/id")
-    public String getStationInfoById(@RequestParam String id) {
-        String result = bikeStationApi.getStationInfoById(id);
+    public BikeStationRepo getStationInfoById(@RequestParam String id) {
+        BikeStationRepo result = bikeStationApi.getStationInfoById(id);
 
         if (result == null) {
             throw new StationNotFoundException();
@@ -29,8 +31,8 @@ public class StationController {
     }
 
     @GetMapping("/name")
-    public String getStationInfoByTownName(@RequestParam String name) {
-        String result = bikeStationApi.getStationInfoByTownName(name);
+    public BikeStationRepo getStationInfoByTownName(@RequestParam String name) {
+        BikeStationRepo result = bikeStationApi.getStationInfoByTownName(name);
 
         if (result == null) {
             throw new StationNotFoundException();
@@ -39,12 +41,12 @@ public class StationController {
     }
 
     @GetMapping("/enable")
-    public String getStationListByEnableBike() {
+    public BikeStationResponse getStationListByEnableBike() {
         return bikeStationApi.getStationListByEnableBike();
     }
 
     @GetMapping("/close")
-    public String getStationListByDistance(@RequestParam float lat, @RequestParam float lon) {
+    public BikeStationResponse getStationListByDistance(@RequestParam float lat, @RequestParam float lon) {
         return bikeStationApi.getStationListByDistance(lat, lon);
     }
 }

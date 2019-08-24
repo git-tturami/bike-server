@@ -23,6 +23,7 @@ import java.util.List;
 public class BikeStationApiImpl implements BikeStationApi {
 
     private static final String TAG = "BikeStationApiImpl";
+
     @Autowired
     private RetrofitConfig retrofitConfig;
 
@@ -47,26 +48,25 @@ public class BikeStationApiImpl implements BikeStationApi {
         return null;
     }
 
-    //minji
     @Override
-    public String getStationInfoById (String stationId) {
+    public BikeStationRepo getStationInfoById (String stationId) {
         List<BikeStationRepo> totalBikeStationList = requestAllStationList();
 
         for (BikeStationRepo bikeStationRepo : totalBikeStationList) {
             if (bikeStationRepo.stationId.equals(stationId)) {
-                return bikeStationRepo.toJson();
+                return bikeStationRepo;
             }
         }
         return null;
     }
 
     @Override
-    public String getStationInfoByTownName(String townName) {
+    public BikeStationRepo getStationInfoByTownName(String townName) {
         List<BikeStationRepo> totalBikeStationList = requestAllStationList();
 
         for (BikeStationRepo bikeStationRepo : totalBikeStationList) {
             if (bikeStationRepo.stationName.contains(townName)) {
-                return bikeStationRepo.toJson();
+                return bikeStationRepo;
             }
         }
         return null;
@@ -77,16 +77,16 @@ public class BikeStationApiImpl implements BikeStationApi {
     }
 
     @Override
-    public String getStationListByEnableBike() {
+    public BikeStationResponse getStationListByEnableBike() {
         BikeStationResponse bikeStationResponse = sortingStationListByEnableBike();
 
-        return bikeStationResponse.toJson();
+        return bikeStationResponse;
     }
 
     @Override
-    public String getStationListByDistance(float lat, float lon) {
+    public BikeStationResponse getStationListByDistance(float lat, float lon) {
         BikeStationResponse bikeStationResponse = sortingStationListByDistance(lat, lon);
-        return bikeStationResponse.toJson();
+        return bikeStationResponse;
     }
 
     private BikeStationResponse sortingStationListByDistance(float lat, float lon) {

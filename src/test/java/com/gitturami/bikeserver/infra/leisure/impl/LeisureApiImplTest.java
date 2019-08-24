@@ -3,28 +3,27 @@ package com.gitturami.bikeserver.infra.leisure.impl;
 import com.gitturami.bikeserver.infra.leisure.constants.ContentTypeIds;
 import com.gitturami.bikeserver.infra.leisure.repository.LeisureResponse;
 import com.gitturami.bikeserver.infra.leisure.repository.body.item.LeisureItem;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-@RunWith(PowerMockRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @PowerMockIgnore({"javax.net.ssl.*",
         "com.sun.org.apache.xerces.*",
         "javax.xml.*",
         "org.xml.*",
         "javax.management.*"})
 public class LeisureApiImplTest {
-    private LeisureApiImpl leisureApiImpl;
 
-    @Before
-    public void setUp() {
-        leisureApiImpl = new LeisureApiImpl();
-    }
+    @Autowired
+    private LeisureApiImpl leisureApiImpl;
 
     @Test
     public void testGetAllLeisureInformation() {

@@ -12,7 +12,7 @@ public class RestaurantController {
 
     @GetMapping("")
     public String getTotalRestaurantList() {
-        String result = restaurantApi.getTotalRestaurantList();
+        String result = restaurantApi.getAllRestaurantList();
 
         if (result == null) {
             throw new RestaurantNotFoundException();

@@ -6,9 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
-import retrofit2.Retrofit;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(PowerMockRunner.class)
@@ -24,7 +22,7 @@ public class RetrofitConfigTest {
     @Test
     public void testGetBikeRetrofit() {
         final String bikeUrl = "http://openapi.seoul.go.kr:8088/4b64546d6862687339384d4b625366/json/";
-        config.setBikeUrl(bikeUrl);
+        config.setSeoulUrl(bikeUrl);
         BikeRetrofit bikeRetrofit = config.getBikeRetrofit();
         assertNotNull(bikeRetrofit);
     }

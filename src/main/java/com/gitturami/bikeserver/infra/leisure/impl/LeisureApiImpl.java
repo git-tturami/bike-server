@@ -1,28 +1,36 @@
 package com.gitturami.bikeserver.infra.leisure.impl;
 
-import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.infra.leisure.constants.ContentTypeIds;
 import com.gitturami.bikeserver.infra.leisure.LeisureApi;
 import com.gitturami.bikeserver.infra.leisure.repository.LeisureResponse;
+import com.gitturami.bikeserver.infra.leisure.retrofit.LeisureRetrofit;
 import com.gitturami.bikeserver.infra.logger.ApiLogger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.jaxb.JaxbConverterFactory;
 import java.io.IOException;
 
 @Service
 public class LeisureApiImpl implements LeisureApi {
     private static final String TAG = "LeisureApiImpl";
     private String serviceKey = "7BU6hvKaLizImcLOotFguCrmNH5l/ixLxWZzpCT4n2ceil5n72Y04LoPnBLC7prrNXjawXY+ZzIO3Smg2OQl5w==";
+    private Retrofit retrofit;
+    private LeisureRetrofit leisureRetrofit;
 
-    @Autowired
-    private RetrofitConfig retrofitConfig;
+    public LeisureApiImpl() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.visitkorea.or.kr/openapi/service/rest/KorService/")
+                .addConverterFactory(JaxbConverterFactory.create())
+                .build();
+        leisureRetrofit = retrofit.create(LeisureRetrofit.class);
+    }
 
     @Override
     public LeisureResponse getAllLeisureInformation() {
         return callRetrofit(
-                retrofitConfig.getLeisureRetrofit().leisureList(
+                leisureRetrofit.leisureList(
                         serviceKey, "", 1, "", "", "", "", "Y",
                 "ETC", "TourAPI3.0_Guide", "A", 10000, 1)
         );
@@ -31,7 +39,7 @@ public class LeisureApiImpl implements LeisureApi {
     @Override
     public LeisureResponse getLeisureInformationByContentId(ContentTypeIds contentTypeId) {
         return callRetrofit(
-                retrofitConfig.getLeisureRetrofit().leisureList(
+                leisureRetrofit.leisureList(
                 serviceKey, contentTypeId.getContentTypeId(), 1, "", "", "", "","Y",
                 "ETC", "TourAPI3.0_Guide","A", 10000, 1)
         );

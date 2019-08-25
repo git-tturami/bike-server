@@ -4,17 +4,12 @@ import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
-import com.gitturami.bikeserver.infra.bike.retrofit.BikeRetrofit;
 import com.gitturami.bikeserver.infra.logger.ApiLogger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;

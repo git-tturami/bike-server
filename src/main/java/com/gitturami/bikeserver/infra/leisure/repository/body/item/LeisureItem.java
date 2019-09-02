@@ -1,11 +1,13 @@
 package com.gitturami.bikeserver.infra.leisure.repository.body.item;
 
+import com.gitturami.bikeserver.common.repository.Item;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class LeisureItem {
+public class LeisureItem implements Item {
     @XmlElement(name = "addr1")
     public String addr1;
 
@@ -37,10 +39,10 @@ public class LeisureItem {
     public String firstimage2;
 
     @XmlElement(name = "mapx")
-    public float mapx;
+    public String mapx;
 
     @XmlElement(name = "mapy")
-    public float mapy;
+    public String mapy;
 
     @XmlElement(name = "mlevel")
     public int mlevel;
@@ -72,8 +74,8 @@ public class LeisureItem {
                 "created time = %s\n" +
                 "first image = %s\n" +
                 "first image2 = %s\n" +
-                "mapx = %f\n" +
-                "mapy = %f\n" +
+                "mapx = %s\n" +
+                "mapy = %s\n" +
                 "mlevel = %d\n" +
                 "modified time = %s\n" +
                 "read count = %d\n" +
@@ -82,5 +84,15 @@ public class LeisureItem {
                 "zip code = %s", addr1, areacode, cat1, cat2, cat3, contentid,
                 contenttypeid, createdtime, firstimage, firstimage2, mapx, mapy,
                 mlevel, modifiedtime, readcount, sigungucode, title, zipcode);
+    }
+
+    @Override
+    public String getLatitude() {
+        return mapy;
+    }
+
+    @Override
+    public String getLongitude() {
+        return mapx;
     }
 }

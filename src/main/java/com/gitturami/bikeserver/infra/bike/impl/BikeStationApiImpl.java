@@ -86,10 +86,10 @@ public class BikeStationApiImpl implements BikeStationApi {
 
     private BikeStationResponse sortingStationListByDistance(float lat, float lon) {
         return requestAndSortStationList((o1, o2) -> {
-            double distanceFromA = Math.pow((double)(o1.stationLatitude - lat), 2.0)
-                    + Math.pow((double)(o1.stationLongitude - lon), 2.0);
-            double distanceFromB = Math.pow((double)(o2.stationLatitude - lat), 2.0)
-                    + Math.pow((double)(o2.stationLongitude - lon), 2.0);
+            double distanceFromA = Math.pow((Double.parseDouble(o1.stationLatitude) - (double)lat), 2.0)
+                    + Math.pow((Double.parseDouble(o1.stationLongitude) - (double)lon), 2.0);
+            double distanceFromB = Math.pow((Double.parseDouble(o2.stationLatitude) - (double)lat), 2.0)
+                    + Math.pow((Double.parseDouble(o2.stationLongitude) - (double)lon), 2.0);
             return Double.compare(distanceFromA, distanceFromB);
         });
     }

@@ -94,8 +94,9 @@ public class BikeStationApiImplTest {
         double prevDistance = 0.0;
         for (int i=0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
             BikeStationRepo repo = bikeStationResponse.rentBikeStatus.row.get(i);
-            double distance = Math.pow((double)(repo.stationLatitude - testLat), 2.0)
-                    + Math.pow((double)(repo.stationLongitude - testLon), 2.0);
+            double distance = Math.pow(Double.parseDouble(repo.stationLatitude) - testLat, 2.0)
+                    + Math.pow(Double.parseDouble(repo.stationLongitude) - testLon, 2.0);
+            System.out.println(distance);
             if (i > 0) {
                 // Distance must be larger than previous Distance.
                 if (distance < prevDistance) {

@@ -1,6 +1,8 @@
 package com.gitturami.bikeserver.infra.cafe.repository;
 
-public class CafeRepo {
+import com.gitturami.bikeserver.common.repository.Item;
+
+public class CafeRepo implements Item {
     public String NM;
     public String ADDR_OLD;
     public String ADDR;
@@ -61,5 +63,15 @@ public class CafeRepo {
                 SUSPENSION_END_DT, RE_OPEN_DT, AREA, POST, WATER_SUPPLY, MALE_NUM,
                 YEAR, USEDBYMANYPEOPLE, GRADE_NM, TOTAL_SCALE, FEMALE_NUM, BUZPLC_ARND_NM,
                 HYGIENE_TYPE, HYGIENE_CONDITIONS, TEL, XCODE, YCODE, PERMISSION_NO, DETAIL_STAT_NM);
+    }
+
+    @Override
+    public String getLatitude() {
+        return YCODE;
+    }
+
+    @Override
+    public String getLongitude() {
+        return XCODE;
     }
 }

@@ -20,8 +20,8 @@ public class BikeStationRepoTest {
         bikeStationRepo.parkingBikeTotCnt = 1;
         bikeStationRepo.rackTotCnt = 1;
         bikeStationRepo.shared = 1.0f;
-        bikeStationRepo.stationLatitude = 1.11f;
-        bikeStationRepo.stationLongitude = 1.21f;
+        bikeStationRepo.stationLatitude = "1.11";
+        bikeStationRepo.stationLongitude = "1.21";
         bikeStationRepo.stationName = "name";
 
         String result = bikeStationRepo.toJson();

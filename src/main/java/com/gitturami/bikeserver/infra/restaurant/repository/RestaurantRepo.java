@@ -1,8 +1,9 @@
 package com.gitturami.bikeserver.infra.restaurant.repository;
 
+import com.gitturami.bikeserver.common.repository.Item;
 import com.google.gson.Gson;
 
-public class RestaurantRepo {
+public class RestaurantRepo implements Item {
     public String CRTFC_UPSO_MGT_SNO;
     public String UPSO_SNO;
     public String UPSO_NM;
@@ -19,8 +20,8 @@ public class RestaurantRepo {
     public String USE_YN;
     public String MAP_INDICT_YN;
     public String CRTFC_CLASS;
-    public float Y_DNTS;
-    public float X_CNTS;
+    public String Y_DNTS;
+    public String X_CNTS;
     public String TEL_NO;
     public String RDN_DETAIL_ADDR;
     public String RDN_ADDR_CODE;
@@ -57,7 +58,7 @@ public class RestaurantRepo {
                         "whether show on map or not (Y? N?)  : %s\n" +
                         "food certification level : %s\n" +
 
-                        "longitude : %f\n" +
+                        "longitude : %s\n" +
                         "latitude : %s\n" +
                         "tel number : %s\n" +
                         "detailed address : %s\n" +
@@ -82,5 +83,15 @@ public class RestaurantRepo {
 
     public String toJson() {
         return new Gson().toJson(this);
+    }
+
+    @Override
+    public String getLatitude() {
+        return Y_DNTS;
+    }
+
+    @Override
+    public String getLongitude() {
+        return X_CNTS;
     }
 }

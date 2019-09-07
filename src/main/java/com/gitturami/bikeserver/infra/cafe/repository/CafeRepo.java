@@ -23,7 +23,7 @@ public class CafeRepo implements Item {
     public String FEMALE_NUM;
     public String BUZPLC_ARND_NM;
     public String HYGIENE_TYPE;
-    public String HYGIENE_CONDITIONS;
+    public String D;
     public String TEL;
     public String XCODE;
     public String YCODE;
@@ -56,7 +56,7 @@ public class CafeRepo implements Item {
                         "hygiene conditions : %s\n" +
                         "tel : %s\n" +
                         "xcode : %s\n" +
-                        "ycode : %s\n" +
+                        "ycode : %sS\n" +
                         "permission no : %s\n" +
                         "detail stat num : %s\n",
                 NM, ADDR_OLD, ADDR, OPEN_DT, STATE, STOP_DT, SUSPENSION_START_DT,

@@ -20,9 +20,8 @@ public class RestaurantApiImpl implements RestaurantApi {
     private RetrofitConfig retrofitConfig;
 
     @Override
-    public String getAllRestaurantList() {
-        RestaurantResponse restaurantResponse = getRestaurantList(1, 1000);
-        return restaurantResponse.toJson();
+    public RestaurantResponse getAllRestaurantList() {
+        return getRestaurantList(1, 1000);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.gitturami.bikeserver.controller.leisure.exception.LeisureNotFoundExce
 import com.gitturami.bikeserver.infra.leisure.LeisureApi;
 import com.gitturami.bikeserver.infra.leisure.constants.ContentTypeIds;
 import com.gitturami.bikeserver.infra.leisure.impl.LeisureApiImpl;
+import com.gitturami.bikeserver.infra.leisure.repository.LeisureResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,47 +25,47 @@ public class LeisureController {
     }
 
     @GetMapping("")
-    public String getLeisureList() {
-        return leisureApi.getAllLeisureInformation().toString();
+    public LeisureResponse getLeisureList() {
+        return leisureApi.getAllLeisureInformation();
     }
 
     @GetMapping("/parks")
-    public String getParkList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.PARK).toString();
+    public LeisureResponse getParkList() {
+        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.PARK);
     }
 
     @GetMapping("/cultures")
-    public String getCultureList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.CULTURE).toString();
+    public LeisureResponse getCultureList() {
+        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.CULTURE);
     }
 
     @GetMapping("/festivals")
-    public String getFestivalList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.FESTIVAL).toString();
+    public LeisureResponse getFestivalList() {
+        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.FESTIVAL);
     }
 
     @GetMapping("/leports")
-    public String getLeportList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.LEPORTS).toString();
+    public LeisureResponse getLeportList() {
+        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.LEPORTS);
     }
 
     @GetMapping("/courses")
-    public String getCourseList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.COURSE).toString();
+    public LeisureResponse getCourseList() {
+        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.COURSE);
     }
 
     @GetMapping("/hotels")
-    public String getHotelList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.HOTEL).toString();
+    public LeisureResponse getHotelList() {
+        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.HOTEL);
     }
 
     @GetMapping("/shopping")
-    public String getShoppingList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.SHOPPING).toString();
+    public LeisureResponse getShoppingList() {
+        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.SHOPPING);
     }
 
     @GetMapping("/foods")
-    public String getFoodList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.FOOD).toString();
+    public LeisureResponse getFoodList() {
+        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.FOOD);
     }
 }

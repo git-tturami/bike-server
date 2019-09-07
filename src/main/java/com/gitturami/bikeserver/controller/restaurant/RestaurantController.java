@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class RestaurantController {
     private RestaurantApi restaurantApi = new RestaurantApiImpl();
 
-    @GetMapping("")
+    @GetMapping("/list")
     public RestaurantResponse getTotalRestaurantList() {
         RestaurantResponse result = restaurantApi.getAllRestaurantList();
 

@@ -24,7 +24,7 @@ public class LeisureController {
         leisureApi = api;
     }
 
-    @GetMapping("")
+    @GetMapping("/list")
     public LeisureResponse getLeisureList() {
         return leisureApi.getAllLeisureInformation();
     }

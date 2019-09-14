@@ -49,4 +49,13 @@ public class StationController {
     public BikeStationResponse getStationListByDistance(@RequestParam float lat, @RequestParam float lon) {
         return bikeStationApi.getStationListByDistance(lat, lon);
     }
+
+    @GetMapping("/list")
+    public BikeStationResponse getAllStationList() {
+        BikeStationResponse response =  bikeStationApi.getStationList(1, 1000);
+        response.rentBikeStatus.row.addAll(
+                bikeStationApi.getStationList(1001, 2000).rentBikeStatus.row
+        );
+        return response;
+    }
 }

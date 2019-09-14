@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @RestController
 @RequestMapping("/stations")
@@ -51,11 +52,12 @@ public class StationController {
     }
 
     @GetMapping("/list")
-    public BikeStationResponse getAllStationList() {
+    public List<BikeStationRepo> getAllStationList() {
         BikeStationResponse response =  bikeStationApi.getStationList(1, 1000);
         response.rentBikeStatus.row.addAll(
                 bikeStationApi.getStationList(1001, 2000).rentBikeStatus.row
         );
-        return response;
+        System.out.println(response.rentBikeStatus.row.size());
+        return response.rentBikeStatus.row;
     }
 }

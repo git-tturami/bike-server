@@ -23,7 +23,7 @@ public class CafeRepo implements Item {
     public String FEMALE_NUM;
     public String BUZPLC_ARND_NM;
     public String HYGIENE_TYPE;
-    public String D;
+    public String HYGIENE_CONDITIONS;
     public String TEL;
     public String XCODE;
     public String YCODE;

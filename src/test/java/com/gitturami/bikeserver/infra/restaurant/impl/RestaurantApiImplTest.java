@@ -21,6 +21,6 @@ public class RestaurantApiImplTest {
     @Test
     public void testGetRestaurantList() {
         RestaurantResponse restaurantResponse = api.getRestaurantList(1, 2);
-        System.out.println(restaurantResponse);
+        System.out.println(restaurantResponse.CrtfcUpsoInfo.row.size());
     }
 }

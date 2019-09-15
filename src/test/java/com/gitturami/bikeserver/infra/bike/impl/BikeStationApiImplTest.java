@@ -2,6 +2,7 @@ package com.gitturami.bikeserver.infra.bike.impl;
 
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
@@ -105,5 +106,11 @@ public class BikeStationApiImplTest {
             }
             prevDistance = distance;
         }
+    }
+
+    @Test
+    public void testGetAllStationList() {
+        BikeStationResponse bikeStationResponse = api.getStationList(1, 2000);
+        System.out.println(bikeStationResponse.rentBikeStatus.row.size());
     }
 }

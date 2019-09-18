@@ -23,7 +23,7 @@ public class StationController {
     @Autowired
     private BikeStationApi bikeStationApi;
 
-    @GetMapping
+    @GetMapping("/id")
     public BikeStationRepo getStationInfoById(@RequestParam String id) {
         BikeStationRepo result = bikeStationApi.getStationInfoById(id);
         if (result == null) {
@@ -32,7 +32,7 @@ public class StationController {
         return result;
     }
 
-    @GetMapping
+    @GetMapping("/name")
     public BikeStationRepo getStationInfoByTownName(@RequestParam String name) {
         BikeStationRepo result = bikeStationApi.getStationInfoByTownName(name);
         if (result == null) {

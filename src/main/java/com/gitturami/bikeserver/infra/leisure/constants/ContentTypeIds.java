@@ -16,6 +16,10 @@ public enum ContentTypeIds {
         return contentTypeId;
     }
 
+    public int getContentTypeIdAsInteger() {
+        return Integer.parseInt(contentTypeId);
+    }
+
     ContentTypeIds(String contentTypeId) {
         this.contentTypeId = contentTypeId;
     }

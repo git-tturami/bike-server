@@ -5,24 +5,20 @@ import com.gitturami.bikeserver.infra.leisure.LeisureApi;
 import com.gitturami.bikeserver.infra.leisure.constants.ContentTypeIds;
 import com.gitturami.bikeserver.infra.leisure.impl.LeisureApiImpl;
 import com.gitturami.bikeserver.infra.leisure.repository.LeisureResponse;
+import com.gitturami.bikeserver.infra.leisure.repository.LightLeisure;
+import com.gitturami.bikeserver.infra.leisure.repository.body.item.LeisureItem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/leisure")
 public class LeisureController {
-    private final LeisureApi leisureApi;
 
-    public LeisureController() {
-        leisureApi = new LeisureApiImpl();
-    }
-
-    public LeisureController(LeisureApi api) {
-        leisureApi = api;
-    }
+    @Autowired
+    private LeisureApi leisureApi;
 
     @GetMapping("/list")
     public LeisureResponse getLeisureList() {
@@ -67,5 +63,20 @@ public class LeisureController {
     @GetMapping("/foods")
     public LeisureResponse getFoodList() {
         return leisureApi.getLeisureInformationByContentId(ContentTypeIds.FOOD);
+    }
+
+    @GetMapping("/summaries")
+    public List<LightLeisure> getLightLeisureList() {
+        return leisureApi.getLightLeisureList();
+    }
+
+    @GetMapping("/terrain/summaries")
+    public List<LightLeisure> getLightTerrainList() {
+        return leisureApi.getLightTerrainList();
+    }
+
+    @GetMapping("/name")
+    public LeisureItem getLeisureByName(@RequestParam String name) {
+        return leisureApi.getLeisureByName(name);
     }
 }

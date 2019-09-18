@@ -26,7 +26,6 @@ public class StationController {
     @GetMapping("/id")
     public BikeStationRepo getStationInfoById(@RequestParam String id) {
         BikeStationRepo result = bikeStationApi.getStationInfoById(id);
-
         if (result == null) {
             throw new StationNotFoundException();
         }
@@ -36,7 +35,6 @@ public class StationController {
     @GetMapping("/name")
     public BikeStationRepo getStationInfoByTownName(@RequestParam String name) {
         BikeStationRepo result = bikeStationApi.getStationInfoByTownName(name);
-
         if (result == null) {
             throw new StationNotFoundException();
         }

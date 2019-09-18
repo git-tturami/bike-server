@@ -1,7 +1,10 @@
 package com.gitturami.bikeserver.infra.bike;
 
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepoLight;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
+
+import java.util.List;
 
 public interface BikeStationApi {
     // getStationInfo() returns station information.
@@ -27,4 +30,7 @@ public interface BikeStationApi {
 
     // getStationList() returns station list from start page to end page.
     BikeStationResponse getStationList(int startPage, int endPage);
+
+    // getStationList() returns summarized station list from start page to end page.
+    List<BikeStationRepoLight> getLightStationList(int startPage, int endPage);
 }

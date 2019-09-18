@@ -5,12 +5,14 @@ import com.gitturami.bikeserver.controller.station.exception.StationNotFoundExce
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
 import com.gitturami.bikeserver.infra.bike.impl.BikeStationApiImpl;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepoLight;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -59,5 +61,17 @@ public class StationController {
         );
         System.out.println(response.rentBikeStatus.row.size());
         return response.rentBikeStatus.row;
+    }
+
+    @GetMapping("/summaries")
+    public List<BikeStationRepoLight> getLightStationList() {
+        List<BikeStationRepoLight> lightList = new ArrayList<>();
+        lightList = bikeStationApi.getLightStationList(1,1000);
+        lightList.addAll(
+                bikeStationApi.getLightStationList(1001,2000)
+        );
+        System.out.println(lightList.size());
+
+        return lightList;
     }
 }

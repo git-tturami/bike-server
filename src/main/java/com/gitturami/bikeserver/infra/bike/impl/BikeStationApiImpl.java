@@ -3,6 +3,7 @@ package com.gitturami.bikeserver.infra.bike.impl;
 import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepoLight;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import com.gitturami.bikeserver.infra.logger.ApiLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BikeStationApiImpl implements BikeStationApi {
@@ -105,6 +105,29 @@ public class BikeStationApiImpl implements BikeStationApi {
             ApiLogger.i(TAG, e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public List<BikeStationRepoLight> getLightStationList(int startPage, int endPage) {
+        BikeStationResponse bikeStationResponse = getStationList(startPage, endPage);
+
+        if (bikeStationResponse == null) {
+            return null;
+        }
+
+        List<BikeStationRepoLight> body = new ArrayList<>();
+
+        for (int i = 0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
+            BikeStationRepoLight bikeStationRepoLight = new BikeStationRepoLight();
+            bikeStationRepoLight.shared = bikeStationResponse.rentBikeStatus.row.get(i).shared;
+            bikeStationRepoLight.stationId = bikeStationResponse.rentBikeStatus.row.get(i).stationId;
+            bikeStationRepoLight.stationLatitude = bikeStationResponse.rentBikeStatus.row.get(i).stationLatitude;
+            bikeStationRepoLight.stationLongitude = bikeStationResponse.rentBikeStatus.row.get(i).stationLongitude;
+
+            body.add(bikeStationRepoLight);
+        }
+
+        return body;
     }
 
     @Override

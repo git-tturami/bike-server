@@ -1,6 +1,7 @@
 package com.gitturami.bikeserver.infra.bike.impl;
 
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
+import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepoLight;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -109,8 +110,14 @@ public class BikeStationApiImplTest {
     }
 
     @Test
+    public void testGetLightStationList() {
+        List<BikeStationRepoLight> lightList = api.getLightStationList(1, 2);
+        System.out.println(lightList.get(1));
+    }
+
+    @Test
     public void testGetAllStationList() {
-        BikeStationResponse bikeStationResponse = api.getStationList(1, 2000);
+        BikeStationResponse bikeStationResponse = api.getStationList(1, 2);
         System.out.println(bikeStationResponse.rentBikeStatus.row.size());
     }
 }

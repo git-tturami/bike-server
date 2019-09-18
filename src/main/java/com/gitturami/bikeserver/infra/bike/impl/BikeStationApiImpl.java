@@ -23,7 +23,9 @@ public class BikeStationApiImpl implements BikeStationApi {
     private RetrofitConfig retrofitConfig;
 
     private List<BikeStationRepo> requestAllStationList() {
-        return getStationList(1, 1000).rentBikeStatus.row;
+        List<BikeStationRepo> ret = getStationList(1, 999).rentBikeStatus.row;
+        ret.addAll(getStationList(1000, 1900).rentBikeStatus.row);
+        return ret;
     }
 
     private BikeStationResponse requestAndSortStationList(Comparator<BikeStationRepo> comparator) {

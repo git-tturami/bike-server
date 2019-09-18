@@ -35,7 +35,7 @@ public class BikeStationApiImplTest {
     }
 
     @Test
-    public void testGetStationInfoById_success() {
+    public void testGetStationInfoById_mustNull() {
         BikeStationRepo result = api.getStationInfoById("ST-109898");
         System.out.println(result);
         assertNull(result);
@@ -50,14 +50,14 @@ public class BikeStationApiImplTest {
     }
 
     @Test
-    public void testGetStationInfoByName_success() {
+    public void testGetStationInfoByName_fail() {
         BikeStationRepo result = api.getStationInfoByTownName("링딩동");
         System.out.println(result);
         assertNull(result);
     }
 
     @Test
-    public void testGetStationInfoByTownName_fail() {
+    public void testGetStationInfoByTownName_success() {
         BikeStationRepo result = api.getStationInfoByTownName("서교동");
         System.out.println(result);
         if(!result.stationId.contains("ST-10")) {

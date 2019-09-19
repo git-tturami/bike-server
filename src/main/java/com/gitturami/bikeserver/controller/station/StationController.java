@@ -64,9 +64,9 @@ public class StationController {
     @GetMapping("/summaries")
     public List<BikeStationRepoLight> getLightStationList() {
         List<BikeStationRepoLight> lightList = new ArrayList<>();
-        lightList = bikeStationApi.getLightStationList(1,1000);
+        lightList = bikeStationApi.getLightStationList(1, 1000);
         lightList.addAll(
-                bikeStationApi.getLightStationList(1001,2000)
+                bikeStationApi.getLightStationList(1001, 2000)
         );
         System.out.println(lightList.size());
 

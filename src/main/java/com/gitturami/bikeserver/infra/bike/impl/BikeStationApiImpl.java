@@ -119,6 +119,7 @@ public class BikeStationApiImpl implements BikeStationApi {
 
         for (int i = 0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
             BikeStationRepoLight bikeStationRepoLight = new BikeStationRepoLight();
+
             bikeStationRepoLight.shared = bikeStationResponse.rentBikeStatus.row.get(i).shared;
             bikeStationRepoLight.stationId = bikeStationResponse.rentBikeStatus.row.get(i).stationId;
             bikeStationRepoLight.stationLatitude = bikeStationResponse.rentBikeStatus.row.get(i).stationLatitude;

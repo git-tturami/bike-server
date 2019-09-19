@@ -4,10 +4,12 @@ import com.gitturami.bikeserver.controller.restaurant.exception.RestaurantNotFou
 import com.gitturami.bikeserver.infra.restaurant.Impl.RestaurantApiImpl;
 import com.gitturami.bikeserver.infra.restaurant.RestaurantApi;
 import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantRepo;
+import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantRepoLight;
 import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,5 +26,13 @@ public class RestaurantController {
             throw new RestaurantNotFoundException();
         }
         return result.CrtfcUpsoInfo.row;
+    }
+
+    @GetMapping("/summaries")
+    public List<RestaurantRepoLight> getLightRestaurantList() {
+        List<RestaurantRepoLight> lightList = new ArrayList<>();
+        lightList = restaurantApi.getLightRestaurantList(1, 1000);
+
+        return lightList;
     }
 }

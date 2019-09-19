@@ -3,6 +3,7 @@ package com.gitturami.bikeserver.infra.restaurant.Impl;
 import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.infra.logger.ApiLogger;
 import com.gitturami.bikeserver.infra.restaurant.RestaurantApi;
+import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantRepoLight;
 import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RestaurantApiImpl implements RestaurantApi {
@@ -36,5 +39,29 @@ public class RestaurantApiImpl implements RestaurantApi {
             ApiLogger.i(TAG, e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public List<RestaurantRepoLight> getLightRestaurantList(int startPage, int endPage) {
+        RestaurantResponse restaurantResponse = getRestaurantList(startPage, endPage);
+
+        if (restaurantResponse == null) {
+            return null;
+        }
+
+        List<RestaurantRepoLight> body = new ArrayList<>();
+
+        for(int i = 0; i < restaurantResponse.CrtfcUpsoInfo.row.size(); i++) {
+            RestaurantRepoLight restaurantRepoLight = new RestaurantRepoLight();
+
+            restaurantRepoLight.UPSO_SNO = restaurantResponse.CrtfcUpsoInfo.row.get(i).UPSO_SNO;
+            restaurantRepoLight.UPSO_NM = restaurantResponse.CrtfcUpsoInfo.row.get(i).UPSO_NM;
+            restaurantRepoLight.Y_DNTS = restaurantResponse.CrtfcUpsoInfo.row.get(i).Y_DNTS;
+            restaurantRepoLight.X_CNTS = restaurantResponse.CrtfcUpsoInfo.row.get(i).X_CNTS;
+
+            body.add(restaurantRepoLight);
+        }
+
+        return body;
     }
 }

@@ -26,7 +26,7 @@ public interface BikeStationApi {
     BikeStationResponse getStationListByEnableBike();
 
     // getStationListByDistance(float lat, float lon) returns stations list sorted by distance from my current location.
-    BikeStationResponse getStationListByDistance(float lat, float lon);
+    List<BikeStationRepoLight> getStationListByDistance(float lat, float lon);
 
     // getStationList() returns station list from start page to end page.
     BikeStationResponse getStationList(int startPage, int endPage);

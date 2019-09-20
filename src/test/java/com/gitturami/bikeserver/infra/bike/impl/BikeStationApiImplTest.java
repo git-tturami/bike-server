@@ -90,21 +90,26 @@ public class BikeStationApiImplTest {
         // testLat testLong is lat and lon of Chung-Ang university
         float testLat = 37.5050881f;
         float testLon = 126.9571012f;
-        BikeStationResponse bikeStationResponse =
-                Whitebox.invokeMethod(api, "sortingStationListByDistance", testLat, testLon);
+        List<BikeStationRepoLight> lightList = api.getStationListByDistance(testLat, testLon);
+        //        Whitebox.invokeMethod(api, "sortingStationListByDistance", testLat, testLon);
 
         double prevDistance = 0.0;
-        for (int i=0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
-            BikeStationRepo repo = bikeStationResponse.rentBikeStatus.row.get(i);
-            double distance = Math.pow(Double.parseDouble(repo.stationLatitude) - testLat, 2.0)
-                    + Math.pow(Double.parseDouble(repo.stationLongitude) - testLon, 2.0);
+
+        for (int i=0; i < lightList.size(); i++) {
+            BikeStationRepoLight bikeStationRepoLight = lightList.get(i);
+            double distance = Math.pow(Double.parseDouble(bikeStationRepoLight.stationLatitude) - testLat, 2.0)
+                    + Math.pow(Double.parseDouble(bikeStationRepoLight.stationLongitude) - testLon, 2.0);
+
             System.out.println(distance);
+            System.out.println(bikeStationRepoLight);
+
             if (i > 0) {
                 // Distance must be larger than previous Distance.
                 if (distance < prevDistance) {
                     fail();
                 }
             }
+
             prevDistance = distance;
         }
     }

@@ -49,7 +49,7 @@ public class StationController {
     }
 
     @GetMapping("/close")
-    public BikeStationResponse getStationListByDistance(@RequestParam float lat, @RequestParam float lon) {
+    public List<BikeStationRepoLight> getStationListByDistance(@RequestParam float lat, @RequestParam float lon) {
         return bikeStationApi.getStationListByDistance(lat, lon);
     }
 

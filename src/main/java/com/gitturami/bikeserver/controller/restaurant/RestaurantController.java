@@ -35,4 +35,9 @@ public class RestaurantController {
 
         return lightList;
     }
+
+    @GetMapping("/name")
+    public RestaurantRepo getRestaurantByName(@RequestParam String name) {
+        return restaurantApi.getRestaurantByName(name);
+    }
 }

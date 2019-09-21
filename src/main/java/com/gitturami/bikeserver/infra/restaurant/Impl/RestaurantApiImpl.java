@@ -3,6 +3,7 @@ package com.gitturami.bikeserver.infra.restaurant.Impl;
 import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.infra.logger.ApiLogger;
 import com.gitturami.bikeserver.infra.restaurant.RestaurantApi;
+import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantRepo;
 import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantRepoLight;
 import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,16 @@ public class RestaurantApiImpl implements RestaurantApi {
         }
 
         return body;
+    }
+
+    @Override
+    public RestaurantRepo getRestaurantByName(String name) {
+        RestaurantResponse response = getAllRestaurantList();
+        for (RestaurantRepo repo : response.CrtfcUpsoInfo.row) {
+            if (name.equals(repo.UPSO_NM)) {
+                return repo;
+            }
+        }
+        return null;
     }
 }

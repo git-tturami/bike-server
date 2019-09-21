@@ -16,5 +16,6 @@ public interface RestaurantApi {
     // getLightRestaurantList() returns summarized restaurant list from start page to end page.
     List<RestaurantRepoLight> getLightRestaurantList(int startPage, int endPage);
 
-    RestaurantRepo getRestaurantByName(String name);
+    // getNearRestaurantList() returns restaurant list located in nearby start pos or end pos.
+    List<RestaurantRepo> getNearbyRestaurantList(float startLat, float startLon, float endLat, float endLon);
 }

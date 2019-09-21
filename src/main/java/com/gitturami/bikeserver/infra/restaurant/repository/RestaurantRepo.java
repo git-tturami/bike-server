@@ -58,8 +58,8 @@ public class RestaurantRepo implements Item {
                         "whether show on map or not (Y? N?)  : %s\n" +
                         "food certification level : %s\n" +
 
-                        "longitude : %s\n" +
                         "latitude : %s\n" +
+                        "longitude : %s\n" +
                         "tel number : %s\n" +
                         "detailed address : %s\n" +
                         "address code : %s\n" +

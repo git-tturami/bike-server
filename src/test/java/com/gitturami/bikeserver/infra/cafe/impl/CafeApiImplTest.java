@@ -1,5 +1,6 @@
 package com.gitturami.bikeserver.infra.cafe.impl;
 
+import com.gitturami.bikeserver.infra.cafe.repository.CafeRepo;
 import com.gitturami.bikeserver.infra.cafe.repository.CafeResponse;
 import com.gitturami.bikeserver.infra.cafe.repository.LightCafe;
 import org.junit.Ignore;
@@ -50,5 +51,11 @@ public class CafeApiImplTest {
         List<LightCafe> response = api.getAllLightCafeList();
 
         System.out.println(response);
+    }
+
+    @Test
+    public void testCafeByName() {
+        CafeRepo repo = api.getCafeByName("흙");
+        System.out.println(repo);
     }
 }

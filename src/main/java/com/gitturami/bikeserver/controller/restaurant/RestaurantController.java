@@ -36,6 +36,12 @@ public class RestaurantController {
         return lightList;
     }
 
+    @GetMapping("/close")
+    public List<RestaurantRepo> getNearbyRestaurantList(@RequestParam float startLat, @RequestParam float startLon,
+                                                      @RequestParam float endLat, @RequestParam float endLon) {
+        return restaurantApi.getNearbyRestaurantList(startLat, startLon, endLat, endLon);
+    }
+
     @GetMapping("/name")
     public RestaurantRepo getRestaurantByName(@RequestParam String name) {
         return restaurantApi.getRestaurantByName(name);

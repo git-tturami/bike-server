@@ -1,6 +1,5 @@
 package com.gitturami.bikeserver.infra.restaurant;
 
-import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantRepo;
 import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantRepoLight;
 import com.gitturami.bikeserver.infra.restaurant.repository.RestaurantResponse;
@@ -13,8 +12,11 @@ public interface RestaurantApi {
     // getRestaurantList() returns restaurant list from start page to end page.
     RestaurantResponse getRestaurantList(int startPage, int endPage);
 
+    RestaurantRepo getRestaurantByName(String name);
+
     // getLightRestaurantList() returns summarized restaurant list from start page to end page.
     List<RestaurantRepoLight> getLightRestaurantList(int startPage, int endPage);
 
-    RestaurantRepo getRestaurantByName(String name);
+    // getNearRestaurantList() returns restaurant list located in nearby start pos or end pos.
+    List<RestaurantRepo> getNearbyRestaurantList(float startLat, float startLon, float endLat, float endLon);
 }

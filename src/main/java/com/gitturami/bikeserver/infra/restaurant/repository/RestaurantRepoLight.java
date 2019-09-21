@@ -14,8 +14,8 @@ public class RestaurantRepoLight implements Item {
         return String.format(
                 "restaurant number : %s\n" +
                         "restaurant name : %s\n" +
-                        "longitude : %s\n" +
-                        "latitude : %s\n" ,
+                        "latitude : %s\n" +
+                        "longitude : %s\n" ,
                 UPSO_SNO, UPSO_NM, Y_DNTS, X_CNTS
         );
     }

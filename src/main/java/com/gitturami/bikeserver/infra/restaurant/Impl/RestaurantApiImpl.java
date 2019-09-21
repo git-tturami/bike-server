@@ -13,6 +13,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -64,6 +65,46 @@ public class RestaurantApiImpl implements RestaurantApi {
         }
 
         return body;
+    }
+
+    @Override
+    public List<RestaurantRepo> getNearbyRestaurantList(float startLat, float startLon,
+                                                  float endLat, float endLon) {
+        RestaurantResponse restaurantResponse = sortingNearbyRestaurant(startLat, startLon, endLat, endLon);
+        List<RestaurantRepo> retList = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            retList.add(restaurantResponse.CrtfcUpsoInfo.row.get(i));
+        }
+
+        return retList;
+    }
+
+    private RestaurantResponse sortingNearbyRestaurant(float startLat, float startLon,
+                                                       float endLat, float endLon) {
+        return requestAndSortStationList((o1, o2) -> {
+            double distanceFromA = Math.pow((Double.parseDouble(o1.Y_DNTS) - (double)startLat), 2.0)
+                    + Math.pow((Double.parseDouble(o1.X_CNTS) - (double)startLon), 2.0);
+            double tempA = Math.pow((Double.parseDouble(o1.Y_DNTS) - (double)endLat), 2.0)
+                    + Math.pow((Double.parseDouble(o1.X_CNTS) - (double)endLon), 2.0);
+
+            distanceFromA = distanceFromA > tempA ? tempA : distanceFromA;
+
+            double distanceFromB = Math.pow((Double.parseDouble(o2.Y_DNTS) - (double)startLat), 2.0)
+                    + Math.pow((Double.parseDouble(o2.X_CNTS) - (double)startLon), 2.0);
+            double tempB = Math.pow((Double.parseDouble(o2.Y_DNTS) - (double)endLat), 2.0)
+                    + Math.pow((Double.parseDouble(o2.X_CNTS) - (double)endLon), 2.0);
+
+            distanceFromB = distanceFromB > tempB ? tempB : distanceFromB;
+
+            return Double.compare(distanceFromA, distanceFromB);
+        });
+    }
+
+    private RestaurantResponse requestAndSortStationList(Comparator<RestaurantRepo> comparator) {
+        RestaurantResponse restaurantResponse = getRestaurantList(1, 1000);
+        restaurantResponse.CrtfcUpsoInfo.row.sort(comparator);
+        return restaurantResponse;
     }
 
     @Override

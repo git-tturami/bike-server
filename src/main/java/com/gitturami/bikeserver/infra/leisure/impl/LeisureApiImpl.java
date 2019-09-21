@@ -120,7 +120,8 @@ public class LeisureApiImpl implements LeisureApi {
         List<LightLeisure> list = new ArrayList<>();
         for (LeisureItem item : response.body.items) {
             if (item == null || "".equals(item.mapx) || "".equals(item.title)
-                || item.mapx == null || item.mapy == null) {
+                || item.mapx == null || item.mapy == null
+                || "null".equals(item.mapx) || "null".equals(item.mapy)) {
                 continue;
             }
             LightLeisure lightItem = new LightLeisure();

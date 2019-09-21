@@ -70,7 +70,7 @@ public class RestaurantApiImpl implements RestaurantApi {
     public RestaurantRepo getRestaurantByName(String name) {
         RestaurantResponse response = getAllRestaurantList();
         for (RestaurantRepo repo : response.CrtfcUpsoInfo.row) {
-            if (name.equals(repo)) {
+            if (name.equals(repo.UPSO_NM)) {
                 return repo;
             }
         }

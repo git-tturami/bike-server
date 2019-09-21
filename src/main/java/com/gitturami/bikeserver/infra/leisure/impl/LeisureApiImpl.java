@@ -24,18 +24,6 @@ import java.util.List;
 @Service
 public class LeisureApiImpl implements LeisureApi {
     private static final String TAG = "LeisureApiImpl";
-//    private String serviceKey = "7BU6hvKaLizImcLOotFguCrmNH5l/ixLxWZzpCT4n2ceil5n72Y04LoPnBLC7prrNXjawXY+ZzIO3Smg2OQl5w==";
-//    private Retrofit retrofit;
-//    private LeisureRetrofit leisureRetrofit;
-//
-//    public LeisureApiImpl() {
-//        retrofit = new Retrofit.Builder()
-//                .baseUrl("http://api.visitkorea.or.kr/openapi/service/rest/KorService/")
-//                .addConverterFactory(JaxbConverterFactory.create())
-//                .build();
-//        leisureRetrofit = retrofit.create(LeisureRetrofit.class);
-//    }
-
     @Autowired
     private RetrofitConfig retrofitConfig;
     private String serviceKey = "7BU6hvKaLizImcLOotFguCrmNH5l/ixLxWZzpCT4n2ceil5n72Y04LoPnBLC7prrNXjawXY+ZzIO3Smg2OQl5w==";
@@ -90,6 +78,11 @@ public class LeisureApiImpl implements LeisureApi {
         List<LeisureItem> list = getAllLeisureInformation().body.items;
         List<LightLeisure> lightList = new ArrayList<>();
         for (LeisureItem item : list) {
+            if (item == null || "".equals(item.mapx) || "".equals(item.title)
+                    || item.mapx == null || item.mapy == null
+                    || "null".equals(item.mapx) || "null".equals(item.mapy)) {
+                continue;
+            }
             LightLeisure lightItem = new LightLeisure();
             lightItem.title = item.title;
             lightItem.mapx = item.mapx;

@@ -48,6 +48,9 @@ public class CafeApiImpl implements CafeApi {
         CafeResponse response = getAllCafeList();
         List<LightCafe> result = new ArrayList<>();
         for (CafeRepo repo : response.coffeeShopInfo.row) {
+            if (repo.XCODE == null || "".equals(repo.XCODE.trim())) {
+                continue;
+            }
             LightCafe item = new LightCafe();
             item.NM = repo.NM;
             item.XCODE = repo.XCODE;

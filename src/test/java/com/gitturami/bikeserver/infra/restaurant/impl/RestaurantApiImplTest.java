@@ -32,7 +32,7 @@ public class RestaurantApiImplTest {
 
     @Test
     public void testGetLightRestaurantList() {
-        List<RestaurantRepoLight> restaurantRepoLightList = api.getLightRestaurantList(1, 2);
+        List<RestaurantRepoLight> restaurantRepoLightList = api.getLightRestaurantList();
         System.out.println(restaurantRepoLightList.size());
     }
 

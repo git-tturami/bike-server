@@ -20,13 +20,42 @@ import java.util.List;
 public class RestaurantApiImpl implements RestaurantApi {
 
     private static final String TAG = "RestaurantApiImpl";
+    List<RestaurantRepo> restaurantList;
+    List<RestaurantRepoLight> lightRestaurantList;
 
     @Autowired
     private RetrofitConfig retrofitConfig;
 
     @Override
-    public RestaurantResponse getAllRestaurantList() {
-        return getRestaurantList(1, 1000);
+    public List<RestaurantRepo> getAllRestaurantList() {
+        if (restaurantList == null) {
+            setRestaurantList();
+        }
+
+        return restaurantList;
+    }
+
+    public void setRestaurantList() {
+        restaurantList = new ArrayList<>();
+        lightRestaurantList = new ArrayList<>();
+
+        for (int i = 1 ;; i += 1000) {
+            restaurantList.addAll(getRestaurantList(i, i + 999).CrtfcUpsoInfo.row);
+
+            if (restaurantList.size() % 1000 != 0) {
+                break;
+            }
+        }
+
+        for(int i=0; i<restaurantList.size(); i++) {
+            RestaurantRepoLight repo = new RestaurantRepoLight();
+            repo.UPSO_NM = restaurantList.get(i).UPSO_NM;
+            repo.UPSO_SNO = restaurantList.get(i).UPSO_SNO;
+            repo.X_CNTS = restaurantList.get(i).X_CNTS;
+            repo.Y_DNTS = restaurantList.get(i).Y_DNTS;
+
+            lightRestaurantList.add(repo);
+        }
     }
 
     @Override
@@ -44,44 +73,21 @@ public class RestaurantApiImpl implements RestaurantApi {
     }
 
     @Override
-    public List<RestaurantRepoLight> getLightRestaurantList(int startPage, int endPage) {
-        RestaurantResponse restaurantResponse = getRestaurantList(startPage, endPage);
-
-        if (restaurantResponse == null) {
-            return null;
+    public List<RestaurantRepoLight> getLightRestaurantList() {
+        if (lightRestaurantList == null) {
+            setRestaurantList();
         }
 
-        List<RestaurantRepoLight> body = new ArrayList<>();
-
-        for(int i = 0; i < restaurantResponse.CrtfcUpsoInfo.row.size(); i++) {
-            RestaurantRepoLight restaurantRepoLight = new RestaurantRepoLight();
-
-            restaurantRepoLight.UPSO_SNO = restaurantResponse.CrtfcUpsoInfo.row.get(i).UPSO_SNO;
-            restaurantRepoLight.UPSO_NM = restaurantResponse.CrtfcUpsoInfo.row.get(i).UPSO_NM;
-            restaurantRepoLight.Y_DNTS = restaurantResponse.CrtfcUpsoInfo.row.get(i).Y_DNTS;
-            restaurantRepoLight.X_CNTS = restaurantResponse.CrtfcUpsoInfo.row.get(i).X_CNTS;
-
-            body.add(restaurantRepoLight);
-        }
-
-        return body;
+        return lightRestaurantList;
     }
 
     @Override
-    public List<RestaurantRepo> getNearbyRestaurantList(float startLat, float startLon,
-                                                  float endLat, float endLon) {
-        RestaurantResponse restaurantResponse = sortingNearbyRestaurant(startLat, startLon, endLat, endLon);
-        List<RestaurantRepo> retList = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            retList.add(restaurantResponse.CrtfcUpsoInfo.row.get(i));
-        }
-
-        return retList;
+    public List<RestaurantRepo> getNearbyRestaurantList(float startLat, float startLon, float endLat, float endLon) {
+        return sortingNearbyRestaurant(startLat, startLon, endLat, endLon);
     }
 
-    private RestaurantResponse sortingNearbyRestaurant(float startLat, float startLon,
-                                                       float endLat, float endLon) {
+    private List<RestaurantRepo> sortingNearbyRestaurant(float startLat, float startLon,
+                                                         float endLat, float endLon) {
         return requestAndSortStationList((o1, o2) -> {
             double distanceFromA = Math.pow((Double.parseDouble(o1.Y_DNTS) - (double)startLat), 2.0)
                     + Math.pow((Double.parseDouble(o1.X_CNTS) - (double)startLon), 2.0);
@@ -101,16 +107,25 @@ public class RestaurantApiImpl implements RestaurantApi {
         });
     }
 
-    private RestaurantResponse requestAndSortStationList(Comparator<RestaurantRepo> comparator) {
-        RestaurantResponse restaurantResponse = getRestaurantList(1, 1000);
-        restaurantResponse.CrtfcUpsoInfo.row.sort(comparator);
-        return restaurantResponse;
+    private List<RestaurantRepo> requestAndSortStationList(Comparator<RestaurantRepo> comparator) {
+        List<RestaurantRepo> list = new ArrayList<>();
+
+        if (restaurantList == null) {
+            setRestaurantList();
+        }
+
+        list.addAll(restaurantList);
+        list.sort(comparator);
+        return list;
     }
 
     @Override
     public RestaurantRepo getRestaurantByName(String name) {
-        RestaurantResponse response = getAllRestaurantList();
-        for (RestaurantRepo repo : response.CrtfcUpsoInfo.row) {
+        if (restaurantList == null) {
+            setRestaurantList();
+        }
+
+        for (RestaurantRepo repo : restaurantList) {
             if (name.equals(repo.UPSO_NM)) {
                 return repo;
             }

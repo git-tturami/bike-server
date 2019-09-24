@@ -19,19 +19,19 @@ public class RestaurantController {
     private RestaurantApi restaurantApi;
 
     @GetMapping("/list")
-    public List<RestaurantRepo> getTotalRestaurantList() {
-        RestaurantResponse result = restaurantApi.getAllRestaurantList();
+    public List<RestaurantRepo> getAllRestaurantList() {
+        List<RestaurantRepo> list = restaurantApi.getAllRestaurantList();
 
-        if (result == null) {
+        if (list == null) {
             throw new RestaurantNotFoundException();
         }
-        return result.CrtfcUpsoInfo.row;
+        return list;
     }
 
     @GetMapping("/summaries")
     public List<RestaurantRepoLight> getLightRestaurantList() {
         List<RestaurantRepoLight> lightList = new ArrayList<>();
-        lightList = restaurantApi.getLightRestaurantList(1, 1000);
+        lightList = restaurantApi.getLightRestaurantList();
 
         return lightList;
     }

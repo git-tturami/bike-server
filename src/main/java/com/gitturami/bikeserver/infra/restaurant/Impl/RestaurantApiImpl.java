@@ -65,7 +65,6 @@ public class RestaurantApiImpl implements RestaurantApi {
 
     @Override
     public RestaurantResponse getRestaurantList(int startPage, int endPage) {
-        System.out.println("get()");
         Call<RestaurantResponse> call = retrofitConfig.getRestaurantRetrofit().restaurantList(startPage, endPage);
         try {
             Response<RestaurantResponse> response = call.execute();

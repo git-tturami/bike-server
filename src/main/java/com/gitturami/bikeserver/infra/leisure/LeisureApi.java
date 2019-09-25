@@ -12,10 +12,14 @@ public interface LeisureApi {
     // getAllLeisureInformation() returns all information of leisure in seoul.
     LeisureResponse getAllLeisureInformation();
 
+    // getLeisureList() returns full leisure list;
+    List<LeisureItem> getLeisureList();
+
+    // getLightLeisureList() returns summarized leisure list.
+    List<LightLeisure> getLightLeisureList();
+
     // getLeisureInformationByContentId() returns informations of leisure by content id.
     LeisureResponse getLeisureInformationByContentId(ContentTypeIds contentTypeId);
-
-    List<LightLeisure> getLightLeisureList();
 
     LeisureItem getLeisureByName(String name);
 

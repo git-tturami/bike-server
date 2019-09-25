@@ -2,6 +2,7 @@ package com.gitturami.bikeserver.config;
 
 import com.gitturami.bikeserver.infra.bike.retrofit.BikeRetrofit;
 import com.gitturami.bikeserver.infra.cafe.retrofit.CafeRetrofit;
+import com.gitturami.bikeserver.infra.cafe_places.CafePlacesApi;
 import com.gitturami.bikeserver.infra.leisure.retrofit.LeisureRetrofit;
 import com.gitturami.bikeserver.infra.restaurant.retrofit.RestaurantRetrofit;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,12 +19,16 @@ public class RetrofitConfig {
     private RestaurantRetrofit restaurantRetrofit;
     private CafeRetrofit cafeRetrofit;
     private LeisureRetrofit leisureRetrofit;
+    private com.gitturami.bikeserver.infra.cafe_places.retrofit.CafeRetrofit cafePlaceRetrofit;
 
     @Value("${url.seoulUrl}")
     private String seoulUrl;
 
     @Value("${url.tourUrl}")
     private String tourUrl;
+
+    @Value("${url.placesUrl}")
+    private String placesUrl;
 
     public RetrofitConfig() {
         System.out.println("retrofit config");
@@ -96,5 +101,21 @@ public class RetrofitConfig {
                 .addConverterFactory(JaxbConverterFactory.create())
                 .build()
                 .create(LeisureRetrofit.class);
+    }
+
+    public com.gitturami.bikeserver.infra.cafe_places.retrofit.CafeRetrofit getCafePlaceRetrofit() {
+        if (cafePlaceRetrofit == null) {
+            setCafePlaceRetrofit();
+        }
+
+        return cafePlaceRetrofit;
+    }
+
+    private void setCafePlaceRetrofit() {
+        cafePlaceRetrofit = new Retrofit.Builder()
+                .baseUrl(placesUrl)
+                .addConverterFactory(JaxbConverterFactory.create())
+                .build()
+                .create(com.gitturami.bikeserver.infra.cafe_places.retrofit.CafeRetrofit.class);
     }
 }

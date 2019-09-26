@@ -18,10 +18,12 @@ public interface LeisureApi {
     // getLightLeisureList() returns summarized leisure list.
     List<LightLeisure> getLightLeisureList();
 
-    // getLeisureInformationByContentId() returns informations of leisure by content id.
-    LeisureResponse getLeisureInformationByContentId(ContentTypeIds contentTypeId);
+    // getLeisureInformationByContentId() returns leisure list by content id.
+    List<LeisureItem> getLeisureListByContentId(ContentTypeIds contentTypeId);
 
+    // getLeisureInformationByContentId() returns information of leisure by name.
     LeisureItem getLeisureByName(String name);
 
-    List<LightLeisure> getLightTerrainList();
+    // getLightTerrainList() returns leisure list by sigungucode.
+    List<LightLeisure> getLightTerrainList(int townCode);
 }

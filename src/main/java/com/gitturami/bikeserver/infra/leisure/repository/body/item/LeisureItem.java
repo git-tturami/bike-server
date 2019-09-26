@@ -62,9 +62,12 @@ public class LeisureItem implements Item {
     @XmlElement(name = "zipcode")
     public String zipcode;
 
+    public int index;
+
     @Override
     public String toString() {
-        return String.format("addr1 = %s\n" +
+        return String.format("id = %d\n" +
+                "addr1 = %s**\n" +
                 "areaCode = %d\n" +
                 "cat1 = %s\n" +
                 "cat2 = %s\n" +
@@ -79,9 +82,9 @@ public class LeisureItem implements Item {
                 "mlevel = %d\n" +
                 "modified time = %s\n" +
                 "read count = %d\n" +
-                "sigungucode = %d\n" +
+                "sigungucode = %d**\n" +
                 "title = %s\n" +
-                "zip code = %s", addr1, areacode, cat1, cat2, cat3, contentid,
+                "zip code = %s\n", index, addr1, areacode, cat1, cat2, cat3, contentid,
                 contenttypeid, createdtime, firstimage, firstimage2, mapx, mapy,
                 mlevel, modifiedtime, readcount, sigungucode, title, zipcode);
     }

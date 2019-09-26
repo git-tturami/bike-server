@@ -35,12 +35,13 @@ public class RestaurantRepo {
     public String FOOD_MENU;
     public String GNT_NO;
     public String CRTFC_YN;
-
+    public int id;
 
     @Override
     public String toString() {
         return String.format(
-                "food certification management serial number : %s\n" +
+                "restaurant Id : %s\n" +
+                        "food certification management serial number : %s\n" +
                         "restaurant number : %s\n" +
                         "restaurant name : %s\n" +
                         "town code : %s\n" +
@@ -74,7 +75,7 @@ public class RestaurantRepo {
                         "representative menu : %s\n" +
                         "grant number : %s\n" +
                         "whether certificated or not (Y? N?) : %s\n" ,
-                CRTFC_UPSO_MGT_SNO, UPSO_SNO, UPSO_NM, CGG_CODE, CGG_CODE_NM, COB_CODE_NM, BIZCND_CODE_NM, OWNER_NM,
+                id, CRTFC_UPSO_MGT_SNO, UPSO_SNO, UPSO_NM, CGG_CODE, CGG_CODE_NM, COB_CODE_NM, BIZCND_CODE_NM, OWNER_NM,
                 CRTFC_GBN, CRTFC_GBN_NM, CRTFC_GHR_NM, CRTFC_CHR_ID, CRTFC_YMD, USE_YN, MAP_INDICT_YN, CRTFC_CLASS,
                 Y_DNTS, X_CNTS, TEL_NO, RDN_DETAIL_ADDR, RDN_ADDR_CODE, RDN_CODE_NM, BIZCND_CODE, COB_CODE, CRTFC_SNO,
                 CRT_TIME, CRT_USR, UPD_TIME, FOOD_MENU, GNT_NO, CRTFC_YN

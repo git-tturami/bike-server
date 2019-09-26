@@ -7,17 +7,17 @@ public class RestaurantRepoLight {
     public String UPSO_NM;
     public double Y_DNTS;
     public double X_CNTS;
-    public int id;
+    public int index;
 
     @Override
     public String toString() {
         return String.format(
-                "restaurant id : %d\n" +
+                "restaurant index : %d\n" +
                 "restaurant number : %s\n" +
                         "restaurant name : %s\n" +
                         "latitude : %f\n" +
                         "longitude : %f\n" ,
-                id, UPSO_SNO, UPSO_NM, Y_DNTS, X_CNTS
+                index, UPSO_SNO, UPSO_NM, Y_DNTS, X_CNTS
         );
     }
 

@@ -8,16 +8,18 @@ public class BikeStationRepoLight {
     public String stationLatitude;
     public String stationLongitude;
     public String stationId;
+    public int index;
 
     @Override
     public String toString() {
         return String.format(
-                "station id : %s\n" +
+                "station index : %d\n" +
+                        "station id : %s\n" +
                         "station name : %s\n" +
                         "shared : %f\n" +
                         "station latitude : %s\n" +
                         "station longitude : %s\n" ,
-                stationId, stationName, shared, stationLatitude, stationLongitude
+                index, stationId, stationName, shared, stationLatitude, stationLongitude
         );
     }
 

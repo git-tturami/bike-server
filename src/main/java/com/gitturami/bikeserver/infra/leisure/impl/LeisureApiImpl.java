@@ -5,16 +5,12 @@ import com.gitturami.bikeserver.infra.leisure.constants.ContentTypeIds;
 import com.gitturami.bikeserver.infra.leisure.LeisureApi;
 import com.gitturami.bikeserver.infra.leisure.repository.LeisureResponse;
 import com.gitturami.bikeserver.infra.leisure.repository.LightLeisure;
-import com.gitturami.bikeserver.infra.leisure.repository.body.LeisureBody;
 import com.gitturami.bikeserver.infra.leisure.repository.body.item.LeisureItem;
-import com.gitturami.bikeserver.infra.leisure.retrofit.LeisureRetrofit;
 import com.gitturami.bikeserver.infra.logger.ApiLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.jaxb.JaxbConverterFactory;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
@@ -24,34 +20,12 @@ import java.util.List;
 @Service
 public class LeisureApiImpl implements LeisureApi {
     private static final String TAG = "LeisureApiImpl";
+    List<LeisureItem> leisureList;
+    List<LightLeisure> lightLeisureList;
+
     @Autowired
     private RetrofitConfig retrofitConfig;
     private String serviceKey = "7BU6hvKaLizImcLOotFguCrmNH5l/ixLxWZzpCT4n2ceil5n72Y04LoPnBLC7prrNXjawXY+ZzIO3Smg2OQl5w==";
-
-    private LeisureResponse callLeisureInformaion(String contentTypeId) {
-        Call<LeisureResponse> call = retrofitConfig.getLeisureRetrofit().leisureList(
-                serviceKey,
-                contentTypeId,
-                1,
-                "",
-                "",
-                "",
-                "",
-                "Y",
-                "ETC",
-                "TourAPI3.0_Guide",
-                "A",
-                10000,
-                1
-        );
-        try {
-            Response<LeisureResponse> response = call.execute();
-            return response.body();
-        } catch (IOException e) {
-            ApiLogger.i(TAG, e.getMessage());
-        }
-        return null;
-    }
 
     @Override
     public LeisureResponse getAllLeisureInformation() {
@@ -59,13 +33,59 @@ public class LeisureApiImpl implements LeisureApi {
                 serviceKey, "", 1, "", "", "", "",
                 "Y", "ETC", "TourAPI3.0_Guide", "A", 10000, 1
         );
+
         try {
             Response<LeisureResponse> response = call.execute();
             return response.body();
         } catch (IOException e) {
             ApiLogger.i(TAG, e.getMessage());
         }
+
         return null;
+    }
+
+    private void setLeisureList() {
+        leisureList = new ArrayList<>();
+        lightLeisureList = new ArrayList<>();
+
+        LeisureResponse response = new LeisureResponse();
+        response = getAllLeisureInformation();
+
+        for (int i=0; i < response.body.items.size(); i++) {
+            LeisureItem item = new LeisureItem();
+            item = response.body.items.get(i);
+
+            if (item == null || "".equals(item.mapx) || "".equals(item.title) || item.mapx == null
+                    || item.mapy == null || "null".equals(item.mapx) || "null".equals(item.mapy)) {
+                continue;
+            }
+
+            leisureList.add(item);
+
+            LightLeisure lightItem = new LightLeisure();
+            lightItem.title = item.title;
+            lightItem.mapx = item.mapx;
+            lightItem.mapy = item.mapy;
+            lightLeisureList.add(lightItem);
+        }
+    }
+
+    @Override
+    public List<LeisureItem> getLeisureList() {
+        if (leisureList == null) {
+            setLeisureList();
+        }
+
+        return leisureList;
+    }
+
+    @Override
+    public List<LightLeisure> getLightLeisureList() {
+        if (lightLeisureList == null) {
+            setLeisureList();
+        }
+
+        return lightLeisureList;
     }
 
     @Override
@@ -74,28 +94,12 @@ public class LeisureApiImpl implements LeisureApi {
     }
 
     @Override
-    public List<LightLeisure> getLightLeisureList() {
-        List<LeisureItem> list = getAllLeisureInformation().body.items;
-        List<LightLeisure> lightList = new ArrayList<>();
-        for (LeisureItem item : list) {
-            if (item == null || "".equals(item.mapx) || "".equals(item.title)
-                    || item.mapx == null || item.mapy == null
-                    || "null".equals(item.mapx) || "null".equals(item.mapy)) {
-                continue;
-            }
-            LightLeisure lightItem = new LightLeisure();
-            lightItem.title = item.title;
-            lightItem.mapx = item.mapx;
-            lightItem.mapy = item.mapy;
-            lightList.add(lightItem);
-        }
-        return lightList;
-    }
-
-    @Override
     public LeisureItem getLeisureByName(@NotNull String name) {
-        LeisureResponse response = getAllLeisureInformation();
-        for (LeisureItem item : response.body.items) {
+        if (leisureList == null) {
+            setLeisureList();
+        }
+
+        for (LeisureItem item : leisureList) {
             if (name.equals(item.title)) {
                 return item;
             }
@@ -105,24 +109,23 @@ public class LeisureApiImpl implements LeisureApi {
 
     @Override
     public List<LightLeisure> getLightTerrainList() {
-        LeisureResponse response = callLeisureInformaion("12");
-        return toLightItem(response);
-    }
-
-    private List<LightLeisure> toLightItem(LeisureResponse response) {
-        List<LightLeisure> list = new ArrayList<>();
-        for (LeisureItem item : response.body.items) {
-            if (item == null || "".equals(item.mapx) || "".equals(item.title)
-                || item.mapx == null || item.mapy == null
-                || "null".equals(item.mapx) || "null".equals(item.mapy)) {
-                continue;
-            }
-            LightLeisure lightItem = new LightLeisure();
-            lightItem.mapx = item.mapx;
-            lightItem.mapy = item.mapy;
-            lightItem.title = item.title;
-            list.add(lightItem);
+        if (lightLeisureList == null) {
+            setLeisureList();
         }
-        return list;
+
+        List<LightLeisure> lightList = new ArrayList<>();
+
+        for (LeisureItem item : leisureList) {
+            if (item.contenttypeid == 12) {
+                LightLeisure lightItem = new LightLeisure();
+                lightItem.title = item.title;
+                lightItem.mapx = item.mapx;
+                lightItem.mapy = item.mapy;
+
+                lightList.add(lightItem);
+            }
+        }
+
+        return lightList;
     }
 }

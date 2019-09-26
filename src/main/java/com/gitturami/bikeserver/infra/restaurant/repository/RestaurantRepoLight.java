@@ -3,19 +3,21 @@ package com.gitturami.bikeserver.infra.restaurant.repository;
 import com.google.gson.Gson;
 
 public class RestaurantRepoLight {
-    public int UPSO_SNO;
+    public String UPSO_SNO;
     public String UPSO_NM;
     public double Y_DNTS;
     public double X_CNTS;
+    public int id;
 
     @Override
     public String toString() {
         return String.format(
-                "restaurant number : %d\n" +
+                "restaurant id : %d\n" +
+                "restaurant number : %s\n" +
                         "restaurant name : %s\n" +
                         "latitude : %f\n" +
                         "longitude : %f\n" ,
-                UPSO_SNO, UPSO_NM, Y_DNTS, X_CNTS
+                id, UPSO_SNO, UPSO_NM, Y_DNTS, X_CNTS
         );
     }
 

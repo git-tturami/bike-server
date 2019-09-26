@@ -2,6 +2,8 @@ package com.gitturami.bikeserver.config;
 
 import com.gitturami.bikeserver.infra.bike.retrofit.BikeRetrofit;
 import com.gitturami.bikeserver.infra.cafe.retrofit.CafeRetrofit;
+import com.gitturami.bikeserver.infra.cafe_places.CafePlacesApi;
+import com.gitturami.bikeserver.infra.cafe_places.retrofit.CafePlacesRetrofit;
 import com.gitturami.bikeserver.infra.leisure.retrofit.LeisureRetrofit;
 import com.gitturami.bikeserver.infra.restaurant.retrofit.RestaurantRetrofit;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,12 +20,16 @@ public class RetrofitConfig {
     private RestaurantRetrofit restaurantRetrofit;
     private CafeRetrofit cafeRetrofit;
     private LeisureRetrofit leisureRetrofit;
+    private CafePlacesRetrofit cafePlacesRetrofit;
 
     @Value("${url.seoulUrl}")
     private String seoulUrl;
 
     @Value("${url.tourUrl}")
     private String tourUrl;
+
+    @Value("${url.placesUrl}")
+    private String placesUrl;
 
     public RetrofitConfig() {
         System.out.println("retrofit config");
@@ -32,6 +38,7 @@ public class RetrofitConfig {
     public void setSeoulUrl(String url) {
         seoulUrl = url;
     }
+    public void setPlacesUrl(String url) {placesUrl = url;}
 
     public BikeRetrofit getBikeRetrofit() {
         if (bikeRetrofit == null) {
@@ -80,6 +87,22 @@ public class RetrofitConfig {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(CafeRetrofit.class);
+    }
+
+    public CafePlacesRetrofit getCafePlacesRetrofit() {
+        if (cafePlacesRetrofit == null) {
+            setCafePlacesRetrofit();
+        }
+
+        return cafePlacesRetrofit;
+    }
+
+    private void setCafePlacesRetrofit() {
+        cafePlacesRetrofit = new Retrofit.Builder()
+                .baseUrl(placesUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(CafePlacesRetrofit.class);
     }
 
     public LeisureRetrofit getLeisureRetrofit() {

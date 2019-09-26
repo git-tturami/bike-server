@@ -7,23 +7,18 @@ import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
 import java.util.List;
 
 public interface BikeStationApi {
-    // getStationInfo() returns station information.
-    String getStationInfo();
 
     // getEnablebike() returns the number of bike parked in station.
     String getEnableBike(String stationId);
 
-    // getTotalBike() returns total number of bike.
-    String getTotalBike();
-
     // getStationInfoById() returns station information with the station-ID requested by client.
-    BikeStationRepo getStationInfoById(String stationId);
+    BikeStationRepo getStationInfoById(int stationId);
 
     // getStationInfoByTownName() returns station information with the town-name requested by client.
     BikeStationRepo getStationInfoByTownName(String townName);
 
     // getStationListByEnableBike() returns stations list sorted by the number of enable bike.
-    BikeStationResponse getStationListByEnableBike();
+    List<BikeStationRepo> getStationListByEnableBike();
 
     // getStationListByDistance(float lat, float lon) returns stations list sorted by distance from my current location.
     List<BikeStationRepoLight> getStationListByDistance(float lat, float lon);

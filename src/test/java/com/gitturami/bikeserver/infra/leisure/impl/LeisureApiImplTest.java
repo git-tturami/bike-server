@@ -15,8 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -53,24 +52,32 @@ public class LeisureApiImplTest {
     }
 
     @Test
-    public void testGetLeisureInformationByContentId() {
-        // LeisureResponse response = leisureApiImpl.getLeisureInformationByContentId(ContentTypeIds.PARK);
-        // for (LeisureItem item : response.body.items) {
-        //     assertEquals(12, item.contenttypeid);
-        // }
+    public void testGetLeisureListById() {
+        List<LeisureItem> list = api.getLeisureListByContentId(ContentTypeIds.PARK);
+        assertEquals(544, list.size());
     }
 
     @Test
-    public void testGetLeisurebyName() {
-        System.out.println(api.getLeisureByName("동화면세점"));
+    public void testGetLeisureByName_success() {
+        LeisureItem item = api.getLeisureByName("동화면세점");
+        if (item.contenttypeid != ContentTypeIds.SHOPPING.getContentTypeIdAsInteger()) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testGetLeisureByName_mustNull() {
+        LeisureItem item = api.getLeisureByName("");
+        assertNull(item);
     }
 
     @Test
     public void testLightTerrainList() {
         List<LightLeisure> lightList = new ArrayList<>();
-        lightList.addAll(api.getLightTerrainList());
+        lightList.addAll(api.getLightTerrainList(27));
 
-        System.out.println(lightList.size());
-        System.out.println(lightList.get(1));
+        if (lightList.size() >= 1) {
+            fail();
+        }
     }
 }

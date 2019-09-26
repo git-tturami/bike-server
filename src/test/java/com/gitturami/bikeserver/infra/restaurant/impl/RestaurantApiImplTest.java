@@ -69,4 +69,20 @@ public class RestaurantApiImplTest {
             prevDistance = distance;
         }
     }
+
+    @Test
+    public void testGetRestaurantByName_success() {
+        RestaurantRepo result = api.getRestaurantByName("북창순두부");
+        if(result.index != 33) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testGetRestaurantById_success() {
+        RestaurantRepo result = api.getRestaurantById(33);
+        if(!result.UPSO_NM.equals("북창순두부")) {
+            fail();
+        }
+    }
 }

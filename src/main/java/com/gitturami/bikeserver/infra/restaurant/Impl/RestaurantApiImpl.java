@@ -137,4 +137,18 @@ public class RestaurantApiImpl implements RestaurantApi {
         }
         return null;
     }
+
+    @Override
+    public RestaurantRepo getRestaurantById(int id) {
+        if (restaurantList == null) {
+            setRestaurantList();
+        }
+
+        for (RestaurantRepo repo : restaurantList) {
+            if (repo.index == id) {
+                return repo;
+            }
+        }
+        return null;
+    }
 }

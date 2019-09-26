@@ -12,8 +12,11 @@ public interface RestaurantApi {
     // getRestaurantList() returns restaurant list from start page to end page.
     RestaurantResponse getRestaurantList(int startPage, int endPage);
 
-    // getRestaurantByname() returns restaurant information with the station-ID requested by client.
+    // getRestaurantByname() returns restaurant information with the station's name requested by client.
     RestaurantRepo getRestaurantByName(String name);
+
+    // getRestaurantById() returns restaurant information with the station's id requested by client.
+    RestaurantRepo getRestaurantById(int id);
 
     // getLightRestaurantList() returns summarized restaurant list from start page to end page.
     List<RestaurantRepoLight> getLightRestaurantList();

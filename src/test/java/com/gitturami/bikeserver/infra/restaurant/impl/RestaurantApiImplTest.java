@@ -34,6 +34,7 @@ public class RestaurantApiImplTest {
     public void testGetLightRestaurantList() {
         List<RestaurantRepoLight> restaurantRepoLightList = api.getLightRestaurantList();
         System.out.println(restaurantRepoLightList.size());
+        System.out.println(restaurantRepoLightList);
     }
 
     @Test

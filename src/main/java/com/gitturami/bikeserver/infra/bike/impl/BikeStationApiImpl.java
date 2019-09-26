@@ -23,9 +23,14 @@ public class BikeStationApiImpl implements BikeStationApi {
     private RetrofitConfig retrofitConfig;
 
     private List<BikeStationRepo> requestAllStationList() {
-        List<BikeStationRepo> ret = getStationList(1, 999).rentBikeStatus.row;
-        ret.addAll(getStationList(1000, 1900).rentBikeStatus.row);
-        return ret;
+        List<BikeStationRepo> bikeStationList = getStationList(1, 999).rentBikeStatus.row;
+        bikeStationList.addAll(getStationList(1000, 1900).rentBikeStatus.row);
+
+        for (int i=0; i<bikeStationList.size(); i++) {
+            bikeStationList.get(i).index = i + 1;
+        }
+
+        return bikeStationList;
     }
 
     private BikeStationResponse requestAndSortStationList(Comparator<BikeStationRepo> comparator) {
@@ -87,7 +92,7 @@ public class BikeStationApiImpl implements BikeStationApi {
 
         for (int i = 0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
             BikeStationRepoLight bikeStationRepoLight = new BikeStationRepoLight();
-
+            bikeStationRepoLight.index = bikeStationResponse.rentBikeStatus.row.get(i).index;
             bikeStationRepoLight.stationName = bikeStationResponse.rentBikeStatus.row.get(i).stationName;
             bikeStationRepoLight.stationId = bikeStationResponse.rentBikeStatus.row.get(i).stationId;
             bikeStationRepoLight.shared = bikeStationResponse.rentBikeStatus.row.get(i).shared;
@@ -135,7 +140,6 @@ public class BikeStationApiImpl implements BikeStationApi {
 
         for (int i = 0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
             BikeStationRepoLight bikeStationRepoLight = new BikeStationRepoLight();
-
             bikeStationRepoLight.stationName = bikeStationResponse.rentBikeStatus.row.get(i).stationName;
             bikeStationRepoLight.stationId = bikeStationResponse.rentBikeStatus.row.get(i).stationId;
             bikeStationRepoLight.shared = bikeStationResponse.rentBikeStatus.row.get(i).shared;

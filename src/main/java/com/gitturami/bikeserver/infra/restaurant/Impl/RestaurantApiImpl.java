@@ -48,12 +48,12 @@ public class RestaurantApiImpl implements RestaurantApi {
         }
 
         for (int i=0; i<restaurantList.size(); i++) {
-            restaurantList.get(i).id = i + 1;
+            restaurantList.get(i).index = i + 1;
         }
 
         for(int i=0; i<restaurantList.size(); i++) {
             RestaurantRepoLight repo = new RestaurantRepoLight();
-            repo.id = restaurantList.get(i).id;
+            repo.index = restaurantList.get(i).index;
             repo.UPSO_NM = restaurantList.get(i).UPSO_NM;
             repo.UPSO_SNO = restaurantList.get(i).UPSO_SNO;
             repo.X_CNTS = Double.parseDouble(restaurantList.get(i).X_CNTS);

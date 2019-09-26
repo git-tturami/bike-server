@@ -3,7 +3,7 @@ package com.gitturami.bikeserver.infra.restaurant.repository;
 import com.gitturami.bikeserver.common.repository.Item;
 import com.google.gson.Gson;
 
-public class RestaurantRepo implements Item {
+public class RestaurantRepo {
     public String CRTFC_UPSO_MGT_SNO;
     public String UPSO_SNO;
     public String UPSO_NM;
@@ -83,15 +83,5 @@ public class RestaurantRepo implements Item {
 
     public String toJson() {
         return new Gson().toJson(this);
-    }
-
-    @Override
-    public String getLatitude() {
-        return Y_DNTS;
-    }
-
-    @Override
-    public String getLongitude() {
-        return X_CNTS;
     }
 }

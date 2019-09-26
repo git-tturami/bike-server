@@ -33,12 +33,6 @@ public class BikeStationApiImpl implements BikeStationApi {
         return bikeStationList;
     }
 
-    private BikeStationResponse requestAndSortStationList(Comparator<BikeStationRepo> comparator) {
-        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
-        bikeStationResponse.rentBikeStatus.row.sort(comparator);
-        return bikeStationResponse;
-    }
-
     @Override
     public String getEnableBike(String stationId) {
         // TODO : implement it!
@@ -72,6 +66,12 @@ public class BikeStationApiImpl implements BikeStationApi {
             }
         }
         return null;
+    }
+
+    private BikeStationResponse requestAndSortStationList(Comparator<BikeStationRepo> comparator) {
+        BikeStationResponse bikeStationResponse = getStationList(1, 1000);
+        bikeStationResponse.rentBikeStatus.row.sort(comparator);
+        return bikeStationResponse;
     }
 
     private BikeStationResponse sortingStationListByEnableBike() {
@@ -140,6 +140,7 @@ public class BikeStationApiImpl implements BikeStationApi {
 
         for (int i = 0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
             BikeStationRepoLight bikeStationRepoLight = new BikeStationRepoLight();
+            bikeStationRepoLight.index = bikeStationResponse.rentBikeStatus.row.get(i).index;
             bikeStationRepoLight.stationName = bikeStationResponse.rentBikeStatus.row.get(i).stationName;
             bikeStationRepoLight.stationId = bikeStationResponse.rentBikeStatus.row.get(i).stationId;
             bikeStationRepoLight.shared = bikeStationResponse.rentBikeStatus.row.get(i).shared;

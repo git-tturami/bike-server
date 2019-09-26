@@ -36,14 +36,14 @@ public class BikeStationApiImplTest {
 
     @Test
     public void testGetStationInfoById_mustNull() {
-        BikeStationRepo result = api.getStationInfoById("ST-109898");
+        BikeStationRepo result = api.getStationInfoById(124133);
         System.out.println(result);
         assertNull(result);
     }
 
     @Test
-    public void testGetStationInfoById_fail() {
-        BikeStationRepo result = api.getStationInfoById("ST-10");
+    public void testGetStationInfoById_success() {
+        BikeStationRepo result = api.getStationInfoById(38);
         if (!result.stationName.contains("서교동")) {
             fail();
         }
@@ -67,16 +67,14 @@ public class BikeStationApiImplTest {
 
     @Test
     public void testGetStationListByEnableBike() {
-        BikeStationResponse result = api.getStationListByEnableBike();
+        List<BikeStationRepo> result = api.getStationListByEnableBike();
         System.out.println(result);
     }
 
     @Test
     public void testSortingStationListByEnableBike() throws Exception {
-        BikeStationResponse bikeStationResponse =
+        List<BikeStationRepo> bikeStationList =
                 Whitebox.invokeMethod(api, "sortingStationListByEnableBike");
-
-        List<BikeStationRepo> bikeStationList = bikeStationResponse.rentBikeStatus.row;
 
         for (int i = 1; i<bikeStationList.size(); i++) {
             if (bikeStationList.get(i-1).parkingBikeTotCnt < bikeStationList.get(i).parkingBikeTotCnt) {

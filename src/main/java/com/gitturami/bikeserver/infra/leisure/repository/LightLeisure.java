@@ -4,14 +4,16 @@ public class LightLeisure {
     public String title;
     public String mapx;
     public String mapy;
+    public int index;
 
     @Override
     public String toString() {
         return String.format(
-                "title = %s\n" +
+                "id = %d\n" +
+                        "title = %s\n" +
                         "mapx = %s\n" +
                         "mapy = %s\n" ,
-                title, mapx, mapy
+                index, title, mapx, mapy
         );
     }
 }

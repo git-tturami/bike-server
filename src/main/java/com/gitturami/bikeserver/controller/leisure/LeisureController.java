@@ -26,43 +26,43 @@ public class LeisureController {
     }
 
     @GetMapping("/parks")
-    public LeisureResponse getParkList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.PARK);
+    public List<LeisureItem> getParkList() {
+        return leisureApi.getLeisureListByContentId(ContentTypeIds.PARK);
     }
 
     @GetMapping("/cultures")
-    public LeisureResponse getCultureList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.CULTURE);
+    public List<LeisureItem> getCultureList() {
+        return leisureApi.getLeisureListByContentId(ContentTypeIds.CULTURE);
     }
 
     @GetMapping("/festivals")
-    public LeisureResponse getFestivalList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.FESTIVAL);
+    public List<LeisureItem> getFestivalList() {
+        return leisureApi.getLeisureListByContentId(ContentTypeIds.FESTIVAL);
     }
 
     @GetMapping("/leports")
-    public LeisureResponse getLeportList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.LEPORTS);
+    public List<LeisureItem> getLeportList() {
+        return leisureApi.getLeisureListByContentId(ContentTypeIds.LEPORTS);
     }
 
     @GetMapping("/courses")
-    public LeisureResponse getCourseList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.COURSE);
+    public List<LeisureItem> getCourseList() {
+        return leisureApi.getLeisureListByContentId(ContentTypeIds.COURSE);
     }
 
     @GetMapping("/hotels")
-    public LeisureResponse getHotelList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.HOTEL);
+    public List<LeisureItem> getHotelList() {
+        return leisureApi.getLeisureListByContentId(ContentTypeIds.HOTEL);
     }
 
     @GetMapping("/shopping")
-    public LeisureResponse getShoppingList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.SHOPPING);
+    public List<LeisureItem> getShoppingList() {
+        return leisureApi.getLeisureListByContentId(ContentTypeIds.SHOPPING);
     }
 
     @GetMapping("/foods")
-    public LeisureResponse getFoodList() {
-        return leisureApi.getLeisureInformationByContentId(ContentTypeIds.FOOD);
+    public List<LeisureItem> getFoodList() {
+        return leisureApi.getLeisureListByContentId(ContentTypeIds.FOOD);
     }
 
     @GetMapping("/summaries")
@@ -71,8 +71,8 @@ public class LeisureController {
     }
 
     @GetMapping("/terrain/summaries")
-    public List<LightLeisure> getLightTerrainList() {
-        return leisureApi.getLightTerrainList();
+    public List<LightLeisure> getLightTerrainList(int townCode) {
+        return leisureApi.getLightTerrainList(townCode);
     }
 
     @GetMapping("/name")

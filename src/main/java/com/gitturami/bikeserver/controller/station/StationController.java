@@ -90,6 +90,4 @@ public class StationController {
     public BikeStationRepo getMockStationById(@RequestParam String id) {
         return mockStationApi.getStationById(id);
     }
-
-
 }

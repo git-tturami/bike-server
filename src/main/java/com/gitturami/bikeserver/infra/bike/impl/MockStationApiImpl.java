@@ -16,7 +16,7 @@ public class MockStationApiImpl {
     private void setList() {
         BikeStationRepoLight item1 = new BikeStationRepoLight();
         item1.index = 0;
-        item1.stationId = "id1";
+        item1.stationId = "0";
         item1.shared = 50f;
         item1.stationLongitude = "126.963413";
         item1.stationLatitude = "37.508982";
@@ -24,7 +24,7 @@ public class MockStationApiImpl {
 
         BikeStationRepoLight item2 = new BikeStationRepoLight();
         item2.index = 1;
-        item2.stationId = "id2";
+        item2.stationId = "1";
         item2.shared = 20f;
         item2.stationLongitude = "126.948258";
         item2.stationLatitude = "37.503588";
@@ -36,7 +36,7 @@ public class MockStationApiImpl {
         BikeStationRepo repo1 = new BikeStationRepo();
         repo1.index = 0;
         repo1.shared = 50f;
-        repo1.stationId = "id1";
+        repo1.stationId = "0";
         repo1.stationLatitude = "37.508982";
         repo1.stationLongitude = "126.963413";
         repo1.stationName = "흑석역 1번출구";
@@ -46,7 +46,7 @@ public class MockStationApiImpl {
         BikeStationRepo repo2 = new BikeStationRepo();
         repo2.index = 1;
         repo2.shared = 20f;
-        repo2.stationId = "id2";
+        repo2.stationId = "1";
         repo2.stationLatitude = "37.503588";
         repo2.stationLongitude = "126.948258";
         repo2.stationName = "상도역 4번출구";

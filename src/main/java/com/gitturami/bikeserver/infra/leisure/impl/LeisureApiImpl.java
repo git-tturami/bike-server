@@ -137,11 +137,29 @@ public class LeisureApiImpl implements LeisureApi {
                 lightItem.title = item.title;
                 lightItem.mapx = item.mapx;
                 lightItem.mapy = item.mapy;
-
                 lightList.add(lightItem);
             }
         }
-
         return lightList;
+    }
+
+    @Override
+    public List<LightLeisure> getLightItems(ContentTypeIds id) {
+        List<LeisureItem> items = getLeisureListByContentId(id);
+        List<LightLeisure> lightItems = new ArrayList<>();
+        for (LeisureItem item : items) {
+            LightLeisure lightItem = new LightLeisure();
+            lightItem.title = item.title;
+            lightItem.mapx = item.mapx;
+            lightItem.mapy = item.mapy;
+            lightItem.index = item.index;
+            lightItems.add(lightItem);
+        }
+        return lightItems;
+    }
+
+    @Override
+    public LeisureItem getLeisureByIndex(int index) {
+        return getLeisureList().get(index);
     }
 }

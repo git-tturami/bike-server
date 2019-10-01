@@ -1,15 +1,13 @@
 package com.gitturami.bikeserver.controller.leisure;
 
-import com.gitturami.bikeserver.controller.leisure.exception.LeisureNotFoundException;
 import com.gitturami.bikeserver.infra.leisure.LeisureApi;
 import com.gitturami.bikeserver.infra.leisure.constants.ContentTypeIds;
-import com.gitturami.bikeserver.infra.leisure.impl.LeisureApiImpl;
 import com.gitturami.bikeserver.infra.leisure.repository.LeisureResponse;
 import com.gitturami.bikeserver.infra.leisure.repository.LightLeisure;
 import com.gitturami.bikeserver.infra.leisure.repository.body.item.LeisureItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.Query;
 
 import java.util.List;
 
@@ -78,5 +76,40 @@ public class LeisureController {
     @GetMapping("/name")
     public LeisureItem getLeisureByName(@RequestParam String name) {
         return leisureApi.getLeisureByName(name);
+    }
+
+    @GetMapping("/hotel/summaries")
+    public List<LightLeisure> getLightHotelList() {
+        return leisureApi.getLightItems(ContentTypeIds.HOTEL);
+    }
+
+    @GetMapping("/shopping/summaries")
+    public List<LightLeisure> getLightShopping() {
+        return leisureApi.getLightItems(ContentTypeIds.SHOPPING);
+    }
+
+    @GetMapping("/foods/summaries")
+    public List<LightLeisure> getLightFood() {
+        return leisureApi.getLightItems(ContentTypeIds.FOOD);
+    }
+
+    @GetMapping("/courses/summaries")
+    public List<LightLeisure> getLightCourses() {
+        return leisureApi.getLightItems(ContentTypeIds.COURSE);
+    }
+
+    @GetMapping("/parks/summaries")
+    public List<LightLeisure> getLightPark() {
+        return leisureApi.getLightItems(ContentTypeIds.PARK);
+    }
+
+    @GetMapping("/parks/leports")
+    public List<LightLeisure> getLightLeports() {
+        return leisureApi.getLightItems(ContentTypeIds.LEPORTS);
+    }
+
+    @GetMapping("/index")
+    public LeisureItem getLeisureByIndex(@RequestParam int index) {
+        return leisureApi.getLeisureByIndex(index);
     }
 }

@@ -26,4 +26,8 @@ public interface LeisureApi {
 
     // getLightTerrainList() returns leisure list by sigungucode.
     List<LightLeisure> getLightTerrainList(int townCode);
+
+    List<LightLeisure> getLightItems(ContentTypeIds id);
+
+    LeisureItem getLeisureByIndex(int index);
 }

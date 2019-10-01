@@ -81,9 +81,14 @@ public class StationController {
         return mockStationApi.getMockLightStationList();
     }
 
+    @GetMapping("/mock/index")
+    public BikeStationRepo getMockStationByIndex(@RequestParam int index) {
+        return mockStationApi.getStationByIndex(index);
+    }
+
     @GetMapping("/mock/id")
-    public BikeStationRepo getMockStationByIndex(@RequestParam int id) {
-        return mockStationApi.getStationByIndex(id);
+    public BikeStationRepo getMockStationById(@RequestParam String id) {
+        return mockStationApi.getStationById(id);
     }
 
 

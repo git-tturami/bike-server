@@ -70,4 +70,18 @@ public class MockStationApiImpl {
         }
         return list.get(index);
     }
+
+    public BikeStationRepo getStationById(String id) {
+        if (list.isEmpty()) {
+            setList();
+        }
+
+        for (BikeStationRepo repo : list) {
+            if (id.equals(repo.stationId)) {
+                return repo;
+            }
+        }
+
+        return null;
+    }
 }

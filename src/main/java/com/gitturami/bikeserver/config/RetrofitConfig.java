@@ -6,6 +6,7 @@ import com.gitturami.bikeserver.infra.cafe_places.CafePlacesApi;
 import com.gitturami.bikeserver.infra.cafe_places.retrofit.CafePlacesRetrofit;
 import com.gitturami.bikeserver.infra.leisure.retrofit.LeisureRetrofit;
 import com.gitturami.bikeserver.infra.restaurant.retrofit.RestaurantRetrofit;
+import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import retrofit2.Retrofit;
@@ -101,6 +102,7 @@ public class RetrofitConfig {
         cafePlacesRetrofit = new Retrofit.Builder()
                 .baseUrl(placesUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(new OkHttpClient.Builder().build())
                 .build()
                 .create(CafePlacesRetrofit.class);
     }

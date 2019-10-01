@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 public interface CafePlacesRetrofit {
     @GET("nearbysearch/json")
     Call<CafeResponse> allCafe(
-            @Query("location") String location,
+            @Query(value = "location", encoded = true) String location,
             @Query("radius") String radius,
             @Query("type") String type,
             @Query("key") String key

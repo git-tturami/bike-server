@@ -2,24 +2,55 @@ package com.gitturami.bikeserver.infra.cafe_places.repository;
 
 
 import com.gitturami.bikeserver.common.repository.Item;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CafeRepo implements Item {
-
-    public Geometry geometry;
+public class CafeRepo implements Item, Serializable {
+    @SerializedName("geometry")
+    @Expose
+    public Geometry geometry = new Geometry();
+    @SerializedName("icon")
+    @Expose
     public String icon;
+    @SerializedName("id")
+    @Expose
     public String id;
+    @SerializedName("name")
+    @Expose
     public String name;
-    public List<Photo> photos;
+    @SerializedName("photos")
+    @Expose
+    public List<Photo> photos= new ArrayList<Photo>();
+    @SerializedName("place_id")
+    @Expose
     public String place_id;
-    public Plus_code plus_code;
+    @SerializedName("plus_code")
+    @Expose
+    public Plus_code plus_code = new Plus_code();
+    @SerializedName("price_level")
+    @Expose
     public int price_level;
+    @SerializedName("rating")
+    @Expose
     public float rating;
+    @SerializedName("reference")
+    @Expose
     public String reference;
+    @SerializedName("scope")
+    @Expose
     public String scope;
-    public List<String> types;
+    @SerializedName("types")
+    @Expose
+    public List<String> types = new ArrayList<String>();
+    @SerializedName("user_ratings_total")
+    @Expose
     public float user_ratings_total;
+    @SerializedName("vicinity")
+    @Expose
     public String vicinity;
 
     @Override

@@ -11,18 +11,20 @@ public class BikeStationRepo implements Item {
     public String stationLatitude;
     public String stationLongitude;
     public String stationId;
+    public int index;
 
     @Override
     public String toString() {
         return String.format(
-                "rack to count : %s\n" +
+                "station index : %d\n" +
+                        "rack to count : %s\n" +
                         "station name : %s\n" +
                         "parking bike total count : %d\n" +
                         "shared : %f\n" +
                         "station latitude : %s\n" +
                         "station longitude : %s\n" +
                         "station id : %s\n",
-                rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude, stationId
+                index, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude, stationId
         );
     }
 

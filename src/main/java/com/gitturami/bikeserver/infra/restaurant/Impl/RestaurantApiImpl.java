@@ -47,12 +47,17 @@ public class RestaurantApiImpl implements RestaurantApi {
             }
         }
 
+        for (int i=0; i<restaurantList.size(); i++) {
+            restaurantList.get(i).index = i + 1;
+        }
+
         for(int i=0; i<restaurantList.size(); i++) {
             RestaurantRepoLight repo = new RestaurantRepoLight();
+            repo.index = restaurantList.get(i).index;
             repo.UPSO_NM = restaurantList.get(i).UPSO_NM;
             repo.UPSO_SNO = restaurantList.get(i).UPSO_SNO;
-            repo.X_CNTS = restaurantList.get(i).X_CNTS;
-            repo.Y_DNTS = restaurantList.get(i).Y_DNTS;
+            repo.X_CNTS = Double.parseDouble(restaurantList.get(i).X_CNTS);
+            repo.Y_DNTS = Double.parseDouble(restaurantList.get(i).Y_DNTS);
 
             lightRestaurantList.add(repo);
         }
@@ -60,7 +65,6 @@ public class RestaurantApiImpl implements RestaurantApi {
 
     @Override
     public RestaurantResponse getRestaurantList(int startPage, int endPage) {
-        System.out.println("get()");
         Call<RestaurantResponse> call = retrofitConfig.getRestaurantRetrofit().restaurantList(startPage, endPage);
         try {
             Response<RestaurantResponse> response = call.execute();
@@ -127,6 +131,20 @@ public class RestaurantApiImpl implements RestaurantApi {
 
         for (RestaurantRepo repo : restaurantList) {
             if (name.equals(repo.UPSO_NM)) {
+                return repo;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public RestaurantRepo getRestaurantById(int id) {
+        if (restaurantList == null) {
+            setRestaurantList();
+        }
+
+        for (RestaurantRepo repo : restaurantList) {
+            if (repo.index == id) {
                 return repo;
             }
         }

@@ -4,6 +4,7 @@ import com.gitturami.bikeserver.config.RetrofitConfig;
 import com.gitturami.bikeserver.controller.station.exception.StationNotFoundException;
 import com.gitturami.bikeserver.infra.bike.BikeStationApi;
 import com.gitturami.bikeserver.infra.bike.impl.BikeStationApiImpl;
+import com.gitturami.bikeserver.infra.bike.impl.MockStationApiImpl;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepo;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationRepoLight;
 import com.gitturami.bikeserver.infra.bike.repository.BikeStationResponse;
@@ -22,9 +23,11 @@ public class StationController {
     private RetrofitConfig config;
     @Autowired
     private BikeStationApi bikeStationApi;
+    @Autowired
+    private MockStationApiImpl mockStationApi;
 
     @GetMapping("/id")
-    public BikeStationRepo getStationInfoById(@RequestParam String id) {
+    public BikeStationRepo getStationInfoById(@RequestParam int id) {
         BikeStationRepo result = bikeStationApi.getStationInfoById(id);
         if (result == null) {
             throw new StationNotFoundException();
@@ -42,7 +45,7 @@ public class StationController {
     }
 
     @GetMapping("/enable")
-    public BikeStationResponse getStationListByEnableBike() {
+    public List<BikeStationRepo> getStationListByEnableBike() {
         return bikeStationApi.getStationListByEnableBike();
     }
 
@@ -71,5 +74,20 @@ public class StationController {
         System.out.println(lightList.size());
 
         return lightList;
+    }
+
+    @GetMapping("/mock/summaries")
+    public List<BikeStationRepoLight> getLightMockList() {
+        return mockStationApi.getMockLightStationList();
+    }
+
+    @GetMapping("/mock/index")
+    public BikeStationRepo getMockStationByIndex(@RequestParam int index) {
+        return mockStationApi.getStationByIndex(index);
+    }
+
+    @GetMapping("/mock/id")
+    public BikeStationRepo getMockStationById(@RequestParam String id) {
+        return mockStationApi.getStationById(id);
     }
 }

@@ -58,7 +58,6 @@ public class RetrofitConfig {
     }
 
     public RestaurantRetrofit getRestaurantRetrofit() {
-        System.out.println("getRestaurantRetrofit()");
         if (restaurantRetrofit == null) {
             setRestaurantRetrofit();
         }

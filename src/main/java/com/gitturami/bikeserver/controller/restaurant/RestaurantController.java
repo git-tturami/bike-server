@@ -46,4 +46,9 @@ public class RestaurantController {
     public RestaurantRepo getRestaurantByName(@RequestParam String name) {
         return restaurantApi.getRestaurantByName(name);
     }
+
+    @GetMapping("/id")
+    public RestaurantRepo getRestaurantById(@RequestParam int id) {
+        return restaurantApi.getRestaurantById(id);
+    }
 }

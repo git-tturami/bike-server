@@ -60,9 +60,11 @@ public class LeisureApiImpl implements LeisureApi {
                 continue;
             }
 
+            item.index = leisureList.size() + 1;
             leisureList.add(item);
 
             LightLeisure lightItem = new LightLeisure();
+            lightItem.index = item.index;
             lightItem.title = item.title;
             lightItem.mapx = item.mapx;
             lightItem.mapy = item.mapy;
@@ -89,8 +91,21 @@ public class LeisureApiImpl implements LeisureApi {
     }
 
     @Override
-    public LeisureResponse getLeisureInformationByContentId(ContentTypeIds contentTypeId) {
-        return null;
+    public List<LeisureItem> getLeisureListByContentId(ContentTypeIds contentTypeId) {
+        if (lightLeisureList == null) {
+            setLeisureList();
+        }
+
+        List<LeisureItem> list = new ArrayList<>();
+        int contentId = contentTypeId.getContentTypeIdAsInteger();
+
+        for (LeisureItem item : leisureList) {
+            if (item.contenttypeid == contentId) {
+                list.add(item);
+            }
+        }
+
+        return list;
     }
 
     @Override
@@ -108,7 +123,7 @@ public class LeisureApiImpl implements LeisureApi {
     }
 
     @Override
-    public List<LightLeisure> getLightTerrainList() {
+    public List<LightLeisure> getLightTerrainList(int townCode) {
         if (lightLeisureList == null) {
             setLeisureList();
         }
@@ -116,16 +131,35 @@ public class LeisureApiImpl implements LeisureApi {
         List<LightLeisure> lightList = new ArrayList<>();
 
         for (LeisureItem item : leisureList) {
-            if (item.contenttypeid == 12) {
+            if (item.sigungucode == townCode) {
                 LightLeisure lightItem = new LightLeisure();
+                lightItem.index = item.index;
                 lightItem.title = item.title;
                 lightItem.mapx = item.mapx;
                 lightItem.mapy = item.mapy;
-
                 lightList.add(lightItem);
             }
         }
-
         return lightList;
+    }
+
+    @Override
+    public List<LightLeisure> getLightItems(ContentTypeIds id) {
+        List<LeisureItem> items = getLeisureListByContentId(id);
+        List<LightLeisure> lightItems = new ArrayList<>();
+        for (LeisureItem item : items) {
+            LightLeisure lightItem = new LightLeisure();
+            lightItem.title = item.title;
+            lightItem.mapx = item.mapx;
+            lightItem.mapy = item.mapy;
+            lightItem.index = item.index;
+            lightItems.add(lightItem);
+        }
+        return lightItems;
+    }
+
+    @Override
+    public LeisureItem getLeisureByIndex(int index) {
+        return getLeisureList().get(index);
     }
 }

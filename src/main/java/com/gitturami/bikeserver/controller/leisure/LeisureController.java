@@ -103,9 +103,19 @@ public class LeisureController {
         return leisureApi.getLightItems(ContentTypeIds.PARK);
     }
 
-    @GetMapping("/parks/leports")
+    @GetMapping("/leports/summaries")
     public List<LightLeisure> getLightLeports() {
         return leisureApi.getLightItems(ContentTypeIds.LEPORTS);
+    }
+
+    @GetMapping("/festivals/summaries")
+    public List<LightLeisure> getLightFestival() {
+        return leisureApi.getLightItems(ContentTypeIds.FESTIVAL);
+    }
+
+    @GetMapping("/cultures/summaries")
+    public List<LightLeisure> getLightCulture() {
+        return leisureApi.getLightItems(ContentTypeIds.CULTURE);
     }
 
     @GetMapping("/index")

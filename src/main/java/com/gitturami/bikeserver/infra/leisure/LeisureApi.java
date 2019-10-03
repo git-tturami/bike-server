@@ -30,4 +30,8 @@ public interface LeisureApi {
     List<LightLeisure> getLightItems(ContentTypeIds id);
 
     LeisureItem getLeisureByIndex(int index);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c37d79bbd9fd3a184fd261657436071050d397d8

@@ -113,7 +113,7 @@ public class LeisureController {
         return leisureApi.getLightItems(ContentTypeIds.FESTIVAL);
     }
 
-    @GetMaaping("/cultures/summaries")
+    @GetMapping("/cultures/summaries")
     public List<LightLeisure> getLightCulture() {
         return leisureApi.getLightItems(ContentTypeIds.CULTURE);
     }

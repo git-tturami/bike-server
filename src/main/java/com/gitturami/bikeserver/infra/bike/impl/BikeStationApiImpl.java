@@ -48,7 +48,7 @@ public class BikeStationApiImpl implements BikeStationApi {
 
     @Override
     public List<BikeStationRepoLight> getLightStationList(int startPage, int endPage) {
-        BikeStationResponse bikeStationResponse = getStationList(startPage, endPage);
+        List<BikeStationRepo> bikeStationResponse = requestAllStationList();
 
         if (bikeStationResponse == null) {
             return null;
@@ -56,14 +56,14 @@ public class BikeStationApiImpl implements BikeStationApi {
 
         List<BikeStationRepoLight> body = new ArrayList<>();
 
-        for (int i = 0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
+        for (int i = 0; i < bikeStationResponse.size(); i++) {
             BikeStationRepoLight bikeStationRepoLight = new BikeStationRepoLight();
-            bikeStationRepoLight.idx = i;
-            bikeStationRepoLight.stationName = bikeStationResponse.rentBikeStatus.row.get(i).stationName;
-            bikeStationRepoLight.stationId = bikeStationResponse.rentBikeStatus.row.get(i).stationId;
-            bikeStationRepoLight.shared = bikeStationResponse.rentBikeStatus.row.get(i).shared;
-            bikeStationRepoLight.stationLatitude = bikeStationResponse.rentBikeStatus.row.get(i).stationLatitude;
-            bikeStationRepoLight.stationLongitude = bikeStationResponse.rentBikeStatus.row.get(i).stationLongitude;
+            bikeStationRepoLight.idx = bikeStationResponse.get(i).idx;
+            bikeStationRepoLight.stationName = bikeStationResponse.get(i).stationName;
+            bikeStationRepoLight.stationId = bikeStationResponse.get(i).stationId;
+            bikeStationRepoLight.shared = bikeStationResponse.get(i).shared;
+            bikeStationRepoLight.stationLatitude = bikeStationResponse.get(i).stationLatitude;
+            bikeStationRepoLight.stationLongitude = bikeStationResponse.get(i).stationLongitude;
 
             body.add(bikeStationRepoLight);
         }

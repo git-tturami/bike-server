@@ -8,7 +8,7 @@ public class BikeStationRepoLight {
     public String stationLatitude;
     public String stationLongitude;
     public String stationId;
-    public int index;
+    public int idx;
 
     @Override
     public String toString() {
@@ -19,7 +19,7 @@ public class BikeStationRepoLight {
                         "shared : %f\n" +
                         "station latitude : %s\n" +
                         "station longitude : %s\n" ,
-                index, stationId, stationName, shared, stationLatitude, stationLongitude
+                idx, stationId, stationName, shared, stationLatitude, stationLongitude
         );
     }
 

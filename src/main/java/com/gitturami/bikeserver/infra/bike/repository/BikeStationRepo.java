@@ -11,7 +11,7 @@ public class BikeStationRepo implements Item {
     public String stationLatitude;
     public String stationLongitude;
     public String stationId;
-    public int index;
+    public int idx;
 
     @Override
     public String toString() {
@@ -24,7 +24,7 @@ public class BikeStationRepo implements Item {
                         "station latitude : %s\n" +
                         "station longitude : %s\n" +
                         "station id : %s\n",
-                index, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude, stationId
+                idx, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude, stationId
         );
     }
 

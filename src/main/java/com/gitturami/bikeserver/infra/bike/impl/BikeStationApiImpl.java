@@ -40,7 +40,7 @@ public class BikeStationApiImpl implements BikeStationApi {
         bikeStationList.addAll(getStationList(1000, 1900).rentBikeStatus.row);
 
         for (int i=0; i<bikeStationList.size(); i++) {
-            bikeStationList.get(i).index = i + 1;
+            bikeStationList.get(i).idx = i + 1;
         }
 
         return bikeStationList;
@@ -58,7 +58,7 @@ public class BikeStationApiImpl implements BikeStationApi {
 
         for (int i = 0; i < bikeStationResponse.rentBikeStatus.row.size(); i++) {
             BikeStationRepoLight bikeStationRepoLight = new BikeStationRepoLight();
-            bikeStationRepoLight.index = bikeStationResponse.rentBikeStatus.row.get(i).index;
+            bikeStationRepoLight.idx = bikeStationResponse.rentBikeStatus.row.get(i).idx;
             bikeStationRepoLight.stationName = bikeStationResponse.rentBikeStatus.row.get(i).stationName;
             bikeStationRepoLight.stationId = bikeStationResponse.rentBikeStatus.row.get(i).stationId;
             bikeStationRepoLight.shared = bikeStationResponse.rentBikeStatus.row.get(i).shared;
@@ -78,11 +78,11 @@ public class BikeStationApiImpl implements BikeStationApi {
     }
 
     @Override
-    public BikeStationRepo getStationInfoById (int stationId) {
+    public BikeStationRepo getStationInfoById(int stationId) {
         List<BikeStationRepo> totalBikeStationList = requestAllStationList();
 
         for (BikeStationRepo bikeStationRepo : totalBikeStationList) {
-            if (bikeStationRepo.index == stationId) {
+            if (bikeStationRepo.idx == stationId) {
                 return bikeStationRepo;
             }
         }
@@ -124,7 +124,7 @@ public class BikeStationApiImpl implements BikeStationApi {
 
         for (int i = 0; i < bikeStationList.size(); i++) {
             BikeStationRepoLight bikeStationRepoLight = new BikeStationRepoLight();
-            bikeStationRepoLight.index = bikeStationList.get(i).index;
+            bikeStationRepoLight.idx = bikeStationList.get(i).idx;
             bikeStationRepoLight.stationName = bikeStationList.get(i).stationName;
             bikeStationRepoLight.stationId = bikeStationList.get(i).stationId;
             bikeStationRepoLight.shared = bikeStationList.get(i).shared;

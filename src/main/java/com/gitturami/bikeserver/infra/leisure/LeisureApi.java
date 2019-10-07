@@ -25,7 +25,7 @@ public interface LeisureApi {
     LeisureItem getLeisureByName(String name);
 
     // getLightTerrainList() returns leisure list by sigungucode.
-    List<LightLeisure> getLightTerrainList(int townCode);
+    List<LightLeisure> getLightTerrainList();
 
     List<LightLeisure> getLightItems(ContentTypeIds id);
 

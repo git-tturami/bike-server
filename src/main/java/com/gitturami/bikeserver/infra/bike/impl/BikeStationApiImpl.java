@@ -80,13 +80,7 @@ public class BikeStationApiImpl implements BikeStationApi {
     @Override
     public BikeStationRepo getStationInfoById(int stationId) {
         List<BikeStationRepo> totalBikeStationList = requestAllStationList();
-
-        for (BikeStationRepo bikeStationRepo : totalBikeStationList) {
-            if (bikeStationRepo.idx == stationId) {
-                return bikeStationRepo;
-            }
-        }
-        return null;
+        return totalBikeStationList.get(stationId);
     }
 
     @Override

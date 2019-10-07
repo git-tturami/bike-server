@@ -69,8 +69,8 @@ public class LeisureController {
     }
 
     @GetMapping("/terrain/summaries")
-    public List<LightLeisure> getLightTerrainList(int townCode) {
-        return leisureApi.getLightTerrainList(townCode);
+    public List<LightLeisure> getLightTerrainList() {
+        return leisureApi.getLightTerrainList();
     }
 
     @GetMapping("/name")

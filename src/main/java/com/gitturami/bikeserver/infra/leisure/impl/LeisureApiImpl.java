@@ -123,7 +123,7 @@ public class LeisureApiImpl implements LeisureApi {
     }
 
     @Override
-    public List<LightLeisure> getLightTerrainList(int townCode) {
+    public List<LightLeisure> getLightTerrainList() {
         if (lightLeisureList == null) {
             setLeisureList();
         }
@@ -131,14 +131,12 @@ public class LeisureApiImpl implements LeisureApi {
         List<LightLeisure> lightList = new ArrayList<>();
 
         for (LeisureItem item : leisureList) {
-            if (item.sigungucode == townCode) {
-                LightLeisure lightItem = new LightLeisure();
-                lightItem.index = item.index;
-                lightItem.title = item.title;
-                lightItem.mapx = item.mapx;
-                lightItem.mapy = item.mapy;
-                lightList.add(lightItem);
-            }
+            LightLeisure lightItem = new LightLeisure();
+            lightItem.index = item.index;
+            lightItem.title = item.title;
+            lightItem.mapx = item.mapx;
+            lightItem.mapy = item.mapy;
+            lightList.add(lightItem);
         }
         return lightList;
     }
@@ -148,6 +146,11 @@ public class LeisureApiImpl implements LeisureApi {
         List<LeisureItem> items = getLeisureListByContentId(id);
         List<LightLeisure> lightItems = new ArrayList<>();
         for (LeisureItem item : items) {
+            if (id == ContentTypeIds.PARK) {
+                if (!"A0101".equals(item.cat2)) {
+                    continue;
+                }
+            }
             LightLeisure lightItem = new LightLeisure();
             lightItem.title = item.title;
             lightItem.mapx = item.mapx;

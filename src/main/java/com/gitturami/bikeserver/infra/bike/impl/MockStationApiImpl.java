@@ -15,7 +15,7 @@ public class MockStationApiImpl {
 
     private void setList() {
         BikeStationRepoLight item1 = new BikeStationRepoLight();
-        item1.index = 0;
+        item1.idx = 0;
         item1.stationId = "0";
         item1.shared = 50f;
         item1.stationLongitude = "126.963413";
@@ -23,7 +23,7 @@ public class MockStationApiImpl {
         item1.stationName = "흑석역 1번출구";
 
         BikeStationRepoLight item2 = new BikeStationRepoLight();
-        item2.index = 1;
+        item2.idx = 1;
         item2.stationId = "1";
         item2.shared = 20f;
         item2.stationLongitude = "126.948258";
@@ -34,7 +34,7 @@ public class MockStationApiImpl {
         lightList.add(item2);
 
         BikeStationRepo repo1 = new BikeStationRepo();
-        repo1.index = 0;
+        repo1.idx = 0;
         repo1.shared = 50f;
         repo1.stationId = "0";
         repo1.stationLatitude = "37.508982";
@@ -44,7 +44,7 @@ public class MockStationApiImpl {
         repo1.parkingBikeTotCnt = 7;
 
         BikeStationRepo repo2 = new BikeStationRepo();
-        repo2.index = 1;
+        repo2.idx = 1;
         repo2.shared = 20f;
         repo2.stationId = "1";
         repo2.stationLatitude = "37.503588";

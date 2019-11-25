@@ -16,4 +16,8 @@ public class LightLeisure {
                 index, title, mapx, mapy
         );
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c37d79bbd9fd3a184fd261657436071050d397d8
